@@ -4,9 +4,9 @@ const router = express.Router();
 const { armor } = require('../controllers/api.controller');
 
 router.route('/')
-  .get();
+  .get(armor.getAll);
 
 router.route('/:id')
-  .get();
+  .get(armor.getOne);
 
 module.exports = router;
