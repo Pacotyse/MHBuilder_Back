@@ -1,0 +1,6 @@
+%syntax-version=1.0.0
+%project=mhbuilder
+
+init_bdd 2023-05-03T11:27:23Z System Administrator <root@MacBook-Pro-de-Enzo.local> # Initialistion de la BDD version 1
+seeding 2023-05-03T12:36:49Z System Administrator <root@MacBook-Pro-de-Enzo.local> # Premier seeding
+view 2023-05-03T22:28:15Z System Administrator <root@MacBook-Pro-de-Enzo.local> # Ajout des views
