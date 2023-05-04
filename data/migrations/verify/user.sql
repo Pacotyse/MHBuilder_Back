@@ -1,4 +1,4 @@
--- Verify mhbuilder:seeding on pg
+-- Verify mhbuilder:User on pg
 
 BEGIN;
 

@@ -1,4 +1,4 @@
--- Verify mhbuilder:view on pg
+-- Verify mhbuilder:weapon on pg
 
 BEGIN;
 

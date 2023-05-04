@@ -1,6 +1,8 @@
 %syntax-version=1.0.0
 %project=mhbuilder
 
-init_bdd 2023-05-03T11:27:23Z System Administrator <root@MacBook-Pro-de-Enzo.local> # Initialistion de la BDD version 1
-seeding 2023-05-03T12:36:49Z System Administrator <root@MacBook-Pro-de-Enzo.local> # Premier seeding
-view 2023-05-03T22:28:15Z System Administrator <root@MacBook-Pro-de-Enzo.local> # Ajout des views
+
+user 2023-05-04T12:18:03Z System Administrator <root@MacBook-Pro-de-Enzo.local> # Create table user
+weapon 2023-05-04T12:25:58Z System Administrator <root@MacBook-Pro-de-Enzo.local> # Create table weapon
+skill 2023-05-04T12:44:44Z System Administrator <root@MacBook-Pro-de-Enzo.local> # Create table skill
+armor 2023-05-04T12:55:28Z System Administrator <root@MacBook-Pro-de-Enzo.local> # Create table armor with skill
