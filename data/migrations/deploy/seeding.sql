@@ -5,10 +5,10 @@ BEGIN;
 -- Insertion des données dans la table "weapon"
 INSERT INTO "weapon" ("name", "rarity", "affinity", "defense_bonus", "secret_effect", "sharpness_red", "sharpness_orange", "sharpness_yellow", "sharpness_green", "sharpness_blue", "sharpness_white", "sharpness_purple") 
 VALUES ('Great Sword', 5, -30, 0, NULL, 50, NULL, NULL, 25, 20, 15, 10),
-('Long Sword', 4, 0, 0, 'Spirit Gauge', 35, 15, NULL, 15, 20, 30, 15),
-('Hammer', 4, 0, 0, 'Stun', 40, NULL, NULL, 20, 15, 10, NULL),
-('Bow', 4, 20, 0, 'Coatings', NULL, 30, 20, NULL, NULL, 40, NULL),
-('Switch Axe', 6, -10, 0, 'Switch', 35, NULL, 25, NULL, NULL, 40, NULL);
+       ('Long Sword', 4, 0, 0, 'Spirit Gauge', 35, 15, NULL, 15, 20, 30, 15),
+       ('Hammer', 4, 0, 0, 'Stun', 40, NULL, NULL, 20, 15, 10, NULL),
+       ('Bow', 4, 20, 0, 'Coatings', 50, 30, 20, NULL, NULL, 40, NULL),
+       ('Switch Axe', 6, -10, 0, 'Switch', 35, NULL, 25, NULL, NULL, 40, NULL);
 
 
 -- Insertion des données dans la table "element"
