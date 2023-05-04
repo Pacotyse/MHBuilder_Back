@@ -1,0 +1,17 @@
+const { Client } = require('pg');
+const logger = require('../utils/logger');
+require('dotenv').config();
+
+const client = new Client({
+  database: 'mhbuilder',
+  host: 'localhost',
+  user: 'spedata',
+  password: '',
+});
+
+client.connect((err) => {
+  if (err) throw err;
+  logger.log('Connecté à la base de données PostgreSQL !');
+});
+
+module.exports = client;
