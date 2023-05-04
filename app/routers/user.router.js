@@ -4,11 +4,11 @@ const router = express.Router();
 const { user } = require('../controllers/api.controller');
 
 router.route('/')
-  .get()
-  .post();
+  .get(user.getAll)
+  .post(user.createOne);
 router.route('/:id')
-  .get()
-  .put()
-  .delete();
+  .get(user.getOne)
+  .put(user.updateOne)
+  .delete(user.deleteOne);
 
 module.exports = router;

@@ -71,13 +71,15 @@ CREATE TABLE "effect" (
 CREATE TABLE "user" (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
     "email" TEXT NOT NULL UNIQUE,
-    "sword" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "pseudo" TEXT NOT NULL UNIQUE,
     "image" TEXT,
     "id_steam" TEXT,
     "id_playstation" TEXT,
     "id_xbox" TEXT,
-    "id_switch" TEXT
+    "id_switch" TEXT,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
+    "updated_at" TIMESTAMPTZ
 );
 
 CREATE TABLE "loadout" (
@@ -86,7 +88,8 @@ CREATE TABLE "loadout" (
     "name" TEXT NOT NULL,
     "description" TEXT,
     "weapon_id" INTEGER REFERENCES "weapon"("id"),
-    "created_at" TIMESTAMPTZ
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
+    "updated_at" TIMESTAMPTZ
 );
 
 CREATE TABLE "loadout_has_armor" (

@@ -54,7 +54,7 @@ VALUES
 (2, 7,'Increases attack power by 40.', 40, NULL, NULL);
 
 -- Insertion des données dans la table "user"
-INSERT INTO "user" ("email", "sword", "pseudo", "image", "id_steam", "id_playstation", "id_xbox", "id_switch")
+INSERT INTO "user" ("email", "password", "pseudo", "image", "id_steam", "id_playstation", "id_xbox", "id_switch")
 VALUES ('test@test.com', 'longsword', 'TestUser', NULL, NULL, NULL, NULL, NULL);
 
 -- Insertion des données dans la table "loadout"
