@@ -23,6 +23,16 @@ const armorController = {
       res.status(500).send('An error occurred while getting the record.');
     }
   },
+  async getAllByLoadout(req, res) {
+    const { idLoadout } = req.params;
+    try {
+      const data = await armor.findAllByLoadout(idLoadout);
+      res.json(data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('An error occurred while getting the record.');
+    }
+  },
 };
 
 module.exports = armorController;

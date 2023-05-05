@@ -2,6 +2,7 @@
 
 BEGIN;
 
+-- 
 CREATE TABLE "weapon" (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "type" TEXT NOT NULL,
@@ -31,5 +32,31 @@ INSERT INTO "weapon" ("type", "name", "rarity", "affinity", "defense_bonus", "se
 ('Long Sword', 'Reaver Calamity', 8, 0, 0, 'None', 40, 30, 20, null, null, null, null, null, null, null, null, null),
 ('Sword and Shield', 'Master Bang', 8, 0, 0, 'None', 12, 20, null, null, null, null, null, 200, null, null, null, null),
 ('Sword and Shield', 'Teostra Emblem', 8, 0, 0, 'None', 20, 15, null, null, null, null, null, 240, null, null, null, null);
+
+-- CREATE VIEW weapon_data AS 
+-- SELECT weapon.id, 
+-- weapon.type, 
+-- weapon.name, 
+-- weapon.rarity,
+-- weapon.affinity, 
+-- weapon.defense_bonus, 
+-- weapon.secret_effect, 
+-- json_build_object(
+-- 	'red', weapon.sharpness_red,
+-- 	'orange', weapon.sharpness_orange,
+-- 	'yellow', weapon.sharpness_yellow,
+-- 	'green', weapon.sharpness_green,
+-- 	'blue', weapon.sharpness_blue,
+-- 	'white', weapon.sharpness_white
+-- ) AS sharpness,
+-- json_build_object(
+-- 	'fire', weapon.element_fire,
+-- 	'water', weapon.element_water,
+-- 	'thunder', weapon.element_thunder,
+-- 	'ice', weapon.element_ice,
+-- 	'dragon', weapon.element_dragon
+-- ) AS element FROM weapon;
+
+
 
 COMMIT;

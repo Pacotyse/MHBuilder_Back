@@ -7,7 +7,7 @@ const weaponRouter = require('./weapon.router');
 const router = express.Router();
 
 router.use('/users', userRouter);
-router.use('/loadouts', loadoutRouter);
+router.use('/loadouts', loadoutRouter, armorRouter);
 router.use('/armors', armorRouter);
 router.use('/weapons', weaponRouter);
 
