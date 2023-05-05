@@ -7,3 +7,4 @@ weapon 2023-05-04T12:25:58Z System Administrator <root@MacBook-Pro-de-Enzo.local
 skill 2023-05-04T12:44:44Z System Administrator <root@MacBook-Pro-de-Enzo.local> # Create table skill
 armor 2023-05-04T12:55:28Z System Administrator <root@MacBook-Pro-de-Enzo.local> # Create table armor with skill
 loadout 2023-05-04T18:00:41Z System Administrator <root@MacBook-Pro-de-Enzo.local> # Create table loadout and loadout_has_armor
+decoration 2023-05-05T11:27:33Z System Administrator <root@MacBook-Pro-de-Enzo.local> # ADD table decoration
