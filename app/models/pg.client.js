@@ -1,4 +1,6 @@
-const { Client } = require('pg');
+const pg = require('pg');
+
+const { Client } = pg;
 const logger = require('../utils/logger');
 require('dotenv').config();
 
@@ -6,8 +8,14 @@ const client = new Client({
   database: 'mhbuilder',
   host: 'localhost',
   user: 'spedata',
-  password: '',
+  password: 'spedata',
 });
+// const client = new Client({
+//   database: 'mhbuilder',
+//   host: 'localhost',
+//   user: 'mhbuilder',
+//   password: 'mhbuilder',
+// });
 
 client.connect((err) => {
   if (err) throw err;
