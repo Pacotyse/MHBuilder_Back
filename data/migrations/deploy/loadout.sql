@@ -6,28 +6,21 @@ CREATE TABLE "loadout" (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" TEXT NOT NULL UNIQUE,
     "description" TEXT,
+    "user_id" INTEGER NOT NULL REFERENCES "user"("id"),
     "weapon_id" INTEGER NOT NULL REFERENCES "weapon"("id"),
+	"head_id" INTEGER NOT NULL REFERENCES "armor"("id"),
+	"chest_id" INTEGER NOT NULL REFERENCES "armor"("id"),
+	"arm_id" INTEGER NOT NULL REFERENCES "armor"("id"),
+	"belt_id" INTEGER NOT NULL REFERENCES "armor"("id"),
+	"leg_id" INTEGER NOT NULL REFERENCES "armor"("id"),
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
 
-CREATE TABLE "loadout_has_armor" (
-    "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "loadout_id" INTEGER REFERENCES "loadout"("id"),
-    "armor_id" INTEGER REFERENCES "armor"("id") 
-);
 
-INSERT INTO "loadout" ("name", "description", "weapon_id", "created_at")
-VALUES 
-('My Loadout 1', 'This is my personal loadout 1.', 1, now()),
-('My Loadout 2', 'This is my personal loadout 2.', 2, now()),
-('My Loadout 3', 'This is my personal loadout 3.', 3, now());
-
-INSERT INTO "loadout_has_armor" ("loadout_id", "armor_id")
-VALUES 
-(1, 1), (1, 2), (1, 3), (1, 4), (1, 5),
-(2, 6), (2, 7), (2, 8), (2, 9), (2, 10),
-(3, 1), (3, 3), (3, 5), (3, 7), (3, 9);
+INSERT INTO "loadout" ("name", "description", "user_id", "weapon_id", "head_id", "chest_id", "arm_id", "belt_id", "leg_id") VALUES
+('Loadout 1', 'Description of loadout 1', 1, 1, 2, 3, 4, 5, 6),
+('Loadout 2', 'Description of loadout 2', 2, 2, 4, 3, 2, 1, 5);
 
 -- CREATE VIEW loadout_data AS 
 -- SELECT 
