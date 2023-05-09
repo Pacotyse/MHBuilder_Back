@@ -11,6 +11,6 @@ router.route('/:id')
 
 //! TODO
 router.route('/:type')
-  .get(armor);
+  .get();
 
 module.exports = router;

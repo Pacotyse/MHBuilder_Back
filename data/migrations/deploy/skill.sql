@@ -42,4 +42,20 @@ INSERT INTO "effect" ("skill_id", "level", "description") VALUES
 (3, 4, 'Attack +16 and affinity +12% when monster is enraged.'),
 (3, 5, 'Attack +20 and affinity +15% when monster is enraged.');
 
+CREATE VIEW skill_data AS
+SELECT 
+skill.id,
+skill.name,
+skill.description,
+json_agg(
+	json_build_object(
+		'level', effect.level,
+		'description', effect.description
+	)
+) AS effect,
+skill.color
+FROM skill
+JOIN effect ON skill.id = skill_id
+GROUP BY skill.id
+
 COMMIT;

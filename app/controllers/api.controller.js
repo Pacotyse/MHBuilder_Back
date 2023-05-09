@@ -3,6 +3,7 @@ const loadout = require('./loadout.controller');
 const armor = require('./armor.controller');
 const weapon = require('./weapon.controller');
 const decoration = require('./decoration.controller');
+const skill = require('./skill.controller');
 
 module.exports = {
   user,
@@ -10,4 +11,5 @@ module.exports = {
   armor,
   weapon,
   decoration,
+  skill,
 };

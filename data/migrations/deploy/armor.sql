@@ -22,36 +22,6 @@ CREATE TABLE "armor_has_skill" (
     "level" INTEGER DEFAULT(1)
 );
 
--- Armor's view with all the specific data from skill and effect
--- CREATE VIEW armor_data AS 
--- SELECT 
---     armor.id, 
---     armor.type, 
---     armor.name, 
---     armor.rarity, 
---     armor.defense, 
---     json_build_object(
---         'fire', armor.resistance_fire, 
---         'water', armor.resistance_water, 
---         'thunder', armor.resistance_thunder, 
---         'ice', armor.resistance_ice, 
---         'dragon', armor.resistance_dragon) 
---     AS resistances,
---     json_agg(
---         json_build_object(
---             'name', skill.name,
---             'description', skill.description,
---             'level', armor_has_skill.level,
---             'effect', effect.description,
--- 			'modifier', effect.modifier_1
---         )
---     ) as skills
--- FROM armor
--- JOIN armor_has_skill ON armor_id = armor.id
--- JOIN skill ON skill.id = armor_has_skill.skill_id
--- JOIN effect ON skill.id = effect.skill_id AND armor_has_skill.level = effect.level
--- GROUP BY armor.id;
-
 -- Seeding armor with 2 armor set
 INSERT INTO "armor" ("type", "name", "rarity", "defense", "resistance_fire", "resistance_water", "resistance_thunder", "resistance_ice", "resistance_dragon")
 VALUES 
@@ -83,5 +53,35 @@ VALUES
 (9, 1, 1), 
 (10, 2, 3), 
 (10, 2, 2); 
+
+-- Armor's view with all the specific data from skill and effect
+CREATE VIEW armor_data AS 
+SELECT 
+    armor.id, 
+    armor.type, 
+    armor.name, 
+    armor.rarity, 
+    armor.defense, 
+    json_build_object(
+        'fire', armor.resistance_fire, 
+        'water', armor.resistance_water, 
+        'thunder', armor.resistance_thunder, 
+        'ice', armor.resistance_ice, 
+        'dragon', armor.resistance_dragon) 
+    AS resistances,
+    json_agg(
+        json_build_object(
+            'name', skill.name,
+            'description', skill.description,
+            'level', armor_has_skill.level,
+            'effect', effect.description,
+			'modifier', effect.modifier_1
+        )
+    ) as skills
+FROM armor
+JOIN armor_has_skill ON armor_id = armor.id
+JOIN skill ON skill.id = armor_has_skill.skill_id
+JOIN effect ON skill.id = effect.skill_id AND armor_has_skill.level = effect.level
+GROUP BY armor.id;
 
 COMMIT;

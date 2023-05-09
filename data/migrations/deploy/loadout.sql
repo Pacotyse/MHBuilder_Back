@@ -22,23 +22,23 @@ INSERT INTO "loadout" ("name", "description", "user_id", "weapon_id", "head_id",
 ('Loadout 1', 'Description of loadout 1', 1, 1, 2, 3, 4, 5, 6),
 ('Loadout 2', 'Description of loadout 2', 2, 2, 4, 3, 2, 1, 5);
 
--- CREATE VIEW loadout_data AS 
--- SELECT 
---   loadout.id, 
---   loadout.name,
---   loadout.description,
---   json_build_object(
---       'id', weapon_data.id,
---       'type', weapon_data.type,
---       'name', weapon_data.name,
---       'rarity', weapon_data.rarity,
---       'affinity', weapon_data.affinity,
---       'defense_bonus', weapon_data.defense_bonus,
---       'secret_effect', weapon_data.secret_effect,
---       'sharpness', weapon_data.sharpness,
---       'element', weapon_data.element
---   ) AS weapon
--- FROM loadout
--- JOIN weapon_data ON loadout.weapon_id = weapon_data.id;
+CREATE VIEW loadout_data AS 
+SELECT 
+  loadout.id, 
+  loadout.name,
+  loadout.description,
+  json_build_object(
+      'id', weapon_data.id,
+      'type', weapon_data.type,
+      'name', weapon_data.name,
+      'rarity', weapon_data.rarity,
+      'affinity', weapon_data.affinity,
+      'defense_bonus', weapon_data.defense_bonus,
+      'secret_effect', weapon_data.secret_effect,
+      'sharpness', weapon_data.sharpness,
+      'element', weapon_data.element
+  ) AS weapon
+FROM loadout
+JOIN weapon_data ON loadout.weapon_id = weapon_data.id;
 
 COMMIT;
