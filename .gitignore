@@ -27,6 +27,10 @@ package-lock.json
 #config
 .env
 sqitch.conf
+pg.client.js
 
 #test
 coverage/
+
+#clipboard
+kk.txt
