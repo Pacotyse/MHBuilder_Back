@@ -10,7 +10,9 @@ const router = express.Router();
 router.use('/users', userRouter);
 router.use('/loadouts', loadoutRouter);
 router.use('/armors', armorRouter);
+router.use('/armors/type', armorRouter);
 router.use('/weapons', weaponRouter);
+router.use('/weapons/type', weaponRouter);
 router.use('/decorations', decorationRouter);
 
 module.exports = router;

@@ -10,7 +10,7 @@ router.route('/:id')
   .get(armor.getOne);
 
 //! TODO
-router.route('/:type')
-  .get(armor);
+router.route('/type/:type')
+  .get(armor.getByType);
 
 module.exports = router;
