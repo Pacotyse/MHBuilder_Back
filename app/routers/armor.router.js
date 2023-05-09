@@ -9,4 +9,8 @@ router.route('/')
 router.route('/:id')
   .get(armor.getOne);
 
+//! TODO
+router.route('/:type')
+  .get(armor);
+
 module.exports = router;

@@ -9,4 +9,8 @@ router.route('/')
 router.route('/:id')
   .get(weapon.getOne);
 
+//! TODO
+router.route('/:type')
+  .get(weapon);
+
 module.exports = router;
