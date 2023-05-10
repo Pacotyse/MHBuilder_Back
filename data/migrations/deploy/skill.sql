@@ -56,6 +56,6 @@ json_agg(
 skill.color
 FROM skill
 JOIN effect ON skill.id = skill_id
-GROUP BY skill.id
+GROUP BY skill.id;
 
 COMMIT;

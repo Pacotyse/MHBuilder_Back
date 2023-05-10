@@ -10,3 +10,30 @@ router.route('/:id')
   .get(skill.getOne);
 
 module.exports = router;
+
+/**
+ * Represents a skill object.
+ * @typedef {object} Skill
+ * @property {number} id - The unique identifier for the skill.
+ * @property {string} name - The name of the skill.
+ * @property {string} description - The description of the skill.
+ * @property {integer} level_max - The maximum level of the skill.
+ * @property {string} color - The color of the skill.
+ */
+
+/**
+ * GET /skills/
+ * @summary Get all skills
+ * @return {object} 200 - Success response
+ * @return {Array.<Skill>} 200 - Array of Skill objects
+ * @return {object} 404 - Error response
+ */
+
+/**
+ * GET /skills/{id}
+ * @summary Get one skill
+ * @param {integer} id.path.required - ID of the skill to get
+ * @return {object} 200 - Success response
+ * @return {Skill} 200 - Skill object
+ * @return {object} 404 - Error response
+ */
