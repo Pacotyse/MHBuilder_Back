@@ -36,8 +36,10 @@ or null if never updated.
 /**
   POST /users/
   @summary Post a new user user
+  @param {object} request.body.required required - User information
   @param {string} request.body.email.required required - User information
   @param {string} request.body.password.required required - User information
+  @param {string} request.body.username.required required - User information
   @return {object} 200 - success response
   @return {User} 200 - User object
   @returns {object} 404 - error response

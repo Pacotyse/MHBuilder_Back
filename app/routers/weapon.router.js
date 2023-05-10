@@ -22,6 +22,7 @@ Represents a weapon object.
 @property {string} type - The type of the weapon.
 @property {string} name - The name of the weapon.
 @property {integer} rarity - The rarity of the weapon.
+@property {integer} attack - The attack of the weapon.
 @property {integer} affinity - The affinity of the weapon.
 @property {string} secret_effect - The secret effect of the weapon.
 @property {integer} sharpness_red - The sharpness value of the weapon in the red zone.

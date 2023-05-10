@@ -7,6 +7,7 @@ CREATE TABLE "weapon" (
     "type" TEXT NOT NULL,
     "name" TEXT NOT NULL UNIQUE,
     "rarity" INTEGER NOT NULL DEFAULT 1,
+    "attack" INTEGER NOT NULL,
     "affinity" INTEGER NOT NULL DEFAULT 0,
     "defense_bonus" INTEGER NOT NULL DEFAULT 0,
     "secret_effect" TEXT,
