@@ -25,13 +25,13 @@ CREATE TABLE "weapon" (
     "element_dragon" INTEGER
 );
 
-INSERT INTO "weapon" ("type", "name", "rarity", "affinity", "defense_bonus", "secret_effect", "sharpness_red", "sharpness_orange", "sharpness_yellow", "sharpness_green", "sharpness_blue", "sharpness_white", "sharpness_purple", "element_fire", "element_water", "element_thunder", "element_ice", "element_dragon") VALUES 
-('Great Sword', 'Wyvern Jawblade', 8, -20, 0, 'None', 48, 20, null, null, null, null, null, null, null, null, null, null),
-('Great Sword', 'Anguish', 8, 0, 0, 'None', 50, 30, null, null, null, null, null, null, null, null, null, null),
-('Long Sword', 'Divine Slasher', 8, 0, 0, 'None', 20, 20, 10, null, null, null, null, null, null, null, null, null),
-('Long Sword', 'Reaver Calamity', 8, 0, 0, 'None', 40, 30, 20, null, null, null, null, null, null, null, null, null),
-('Sword and Shield', 'Master Bang', 8, 0, 0, 'None', 12, 20, null, null, null, null, null, 200, null, null, null, null),
-('Sword and Shield', 'Teostra Emblem', 8, 0, 0, 'None', 20, 15, null, null, null, null, null, 240, null, null, null, null);
+INSERT INTO "weapon" ("type", "name", "rarity", "attack", "affinity", "defense_bonus", "secret_effect", "sharpness_red", "sharpness_orange", "sharpness_yellow", "sharpness_green", "sharpness_blue", "sharpness_white", "sharpness_purple", "element_fire", "element_water", "element_thunder", "element_ice", "element_dragon") VALUES 
+('Great Sword', 'Wyvern Jawblade', 8, 220, -20, 0, 'None', 48, 20, null, null, null, null, null, null, null, null, null, null),
+('Great Sword', 'Anguish', 8, 240,0, 0, 'None', 50, 30, null, null, null, null, null, null, null, null, null, null),
+('Long Sword', 'Divine Slasher', 8, 180, 0, 0, 'None', 20, 20, 10, null, null, null, null, null, null, null, null, null),
+('Long Sword', 'Reaver Calamity', 8, 170, 0, 0, 'None', 40, 30, 20, null, null, null, null, null, null, null, null, null),
+('Sword and Shield', 'Master Bang', 8, 120, 0, 0, 'None', 12, 20, null, null, null, null, null, 200, null, null, null, null),
+('Sword and Shield', 'Teostra Emblem', 8, 110, 0, 0, 'None', 20, 15, null, null, null, null, null, 240, null, null, null, null);
 
 CREATE VIEW weapon_data AS 
 SELECT weapon.id, 

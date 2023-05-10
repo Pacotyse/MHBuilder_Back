@@ -1,4 +1,5 @@
 const express = require('express');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const expressJSDocSwagger = require('express-jsdoc-swagger');
 const routerApi = require('./routers/api.router');
 

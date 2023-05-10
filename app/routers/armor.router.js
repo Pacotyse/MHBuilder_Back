@@ -9,9 +9,8 @@ router.route('/')
 router.route('/:id')
   .get(armor.getOne);
 
-//! TODO
-router.route('/:type')
-  .get();
+router.route('/type/:type')
+  .get(armor.getByType);
 
 module.exports = router;
 
@@ -45,4 +44,13 @@ Represents an armor object.
   @return {object} 200 - success response
   @return {Armor} 200 - Armor object
   @returns {Error} 404 - error response
+  */
+
+/**
+  GET /armors/type/{type}
+  @summary Get all armors by type
+  @param {string} type.path.required - Type of the armors to get
+  @return {object} 200 - success response
+  @return {Weapon} 200 - Weapon object
+  @returns {object} 404 - error response
   */
