@@ -2,26 +2,13 @@ const { decoration } = require('../models/index.datamapper');
 
 const decorationController = {
   async getAll(req, res) {
-    try {
-      const data = await decoration.findAll();
-      res.json(data);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('An error occurred while getting the record.');
-    }
+    const data = await decoration.findAll();
+    res.json(data);
   },
   async getOne(req, res) {
     const { id } = req.params;
-    if (id === []) {
-      res.send("Cette page n'existe pas !");
-    }
-    try {
-      const data = await decoration.findByPk(id);
-      res.json(data);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('An error occurred while getting the record.');
-    }
+    const data = await decoration.findByPk(id);
+    res.json(data);
   },
 };
 

@@ -1,6 +1,7 @@
 const express = require('express');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const expressJSDocSwagger = require('express-jsdoc-swagger');
+const errorMiddleware = require('./middlewares/error.middleware');
 const routerApi = require('./routers/api.router');
 
 const options = {
@@ -36,6 +37,6 @@ const app = express();
 expressJSDocSwagger(app)(options);
 
 app.use(express.json());
-app.use(routerApi);
+app.use(errorMiddleware.errorMiddleware, routerApi);
 
 module.exports = app;
