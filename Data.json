@@ -1,0 +1,471 @@
+// Weapons 
+
+[
+	{
+		"id": 1,
+		"type": "Great Sword",
+		"name": "Wyvern Jawblade",
+		"rarity": 8,
+		"affinity": -20,
+		"defense_bonus": 0,
+		"secret_effect": "None",
+		"sharpness": {
+			"red": 48,
+			"orange": 20,
+			"yellow": null,
+			"green": null,
+			"blue": null,
+			"white": null
+		},
+		"element": {
+			"fire": null,
+			"water": null,
+			"thunder": null,
+			"ice": null,
+			"dragon": null
+		}
+	},
+	{
+		"id": 2,
+		"type": "Great Sword",
+		"name": "Anguish",
+		"rarity": 8,
+		"affinity": 0,
+		"defense_bonus": 0,
+		"secret_effect": "None",
+		"sharpness": {
+			"red": 50,
+			"orange": 30,
+			"yellow": null,
+			"green": null,
+			"blue": null,
+			"white": null
+		},
+		"element": {
+			"fire": null,
+			"water": null,
+			"thunder": null,
+			"ice": null,
+			"dragon": null
+		}
+	},
+	{
+		"id": 3,
+		"type": "Long Sword",
+		"name": "Divine Slasher",
+		"rarity": 8,
+		"affinity": 0,
+		"defense_bonus": 0,
+		"secret_effect": "None",
+		"sharpness": {
+			"red": 20,
+			"orange": 20,
+			"yellow": 10,
+			"green": null,
+			"blue": null,
+			"white": null
+		},
+		"element": {
+			"fire": null,
+			"water": null,
+			"thunder": null,
+			"ice": null,
+			"dragon": null
+		}
+	},
+	{
+		"id": 4,
+		"type": "Long Sword",
+		"name": "Reaver Calamity",
+		"rarity": 8,
+		"affinity": 0,
+		"defense_bonus": 0,
+		"secret_effect": "None",
+		"sharpness": {
+			"red": 40,
+			"orange": 30,
+			"yellow": 20,
+			"green": null,
+			"blue": null,
+			"white": null
+		},
+		"element": {
+			"fire": null,
+			"water": null,
+			"thunder": null,
+			"ice": null,
+			"dragon": null
+		}
+	},
+	{
+		"id": 5,
+		"type": "Sword and Shield",
+		"name": "Master Bang",
+		"rarity": 8,
+		"affinity": 0,
+		"defense_bonus": 0,
+		"secret_effect": "None",
+		"sharpness": {
+			"red": 12,
+			"orange": 20,
+			"yellow": null,
+			"green": null,
+			"blue": null,
+			"white": null
+		},
+		"element": {
+			"fire": 200,
+			"water": null,
+			"thunder": null,
+			"ice": null,
+			"dragon": null
+		}
+	},
+	{
+		"id": 6,
+		"type": "Sword and Shield",
+		"name": "Teostra Emblem",
+		"rarity": 8,
+		"affinity": 0,
+		"defense_bonus": 0,
+		"secret_effect": "None",
+		"sharpness": {
+			"red": 20,
+			"orange": 15,
+			"yellow": null,
+			"green": null,
+			"blue": null,
+			"white": null
+		},
+		"element": {
+			"fire": 240,
+			"water": null,
+			"thunder": null,
+			"ice": null,
+			"dragon": null
+		}
+	}
+]
+
+// Weapon
+
+{
+	"id": 1,
+	"type": "Great Sword",
+	"name": "Wyvern Jawblade",
+	"rarity": 8,
+	"affinity": -20,
+	"defense_bonus": 0,
+	"secret_effect": "None",
+	"sharpness": {
+		"red": 48,
+		"orange": 20,
+		"yellow": null,
+		"green": null,
+		"blue": null,
+		"white": null
+	},
+	"element": {
+		"fire": null,
+		"water": null,
+		"thunder": null,
+		"ice": null,
+		"dragon": null
+	}
+}
+
+// Armors
+
+[
+	{
+		"id": 1,
+		"type": "Head",
+		"name": "Rathalos Helm",
+		"rarity": 5,
+		"defense": 78,
+		"resistances": {
+			"fire": 3,
+			"water": -2,
+			"thunder": 0,
+			"ice": 0,
+			"dragon": -1
+		},
+		"skills": [
+			{
+				"name": "Critical Eye",
+				"description": "Increases affinity.",
+				"level": 1,
+				"effect": "Increases affinity by 3%.",
+				"modifier": null
+			},
+			{
+				"name": "Weakness Exploit",
+				"description": "Increases affinity when attacking monster weak points.",
+				"level": 3,
+				"effect": "Increases affinity by 50% when attacking a monster weak point.",
+				"modifier": null
+			}
+		]
+	},
+	{
+		"id": 2,
+		"type": "Chest",
+		"name": "Rathalos Mail",
+		"rarity": 5,
+		"defense": 84,
+		"resistances": {
+			"fire": 3,
+			"water": -2,
+			"thunder": 0,
+			"ice": 0,
+			"dragon": -1
+		},
+		"skills": [
+			{
+				"name": "Weakness Exploit",
+				"description": "Increases affinity when attacking monster weak points.",
+				"level": 1,
+				"effect": "Increases affinity by 15% when attacking a monster weak point.",
+				"modifier": null
+			}
+		]
+	},
+	{
+		"id": 3,
+		"type": "Arms",
+		"name": "Rathalos Braces",
+		"rarity": 5,
+		"defense": 78,
+		"resistances": {
+			"fire": 3,
+			"water": -2,
+			"thunder": 0,
+			"ice": 0,
+			"dragon": -1
+		},
+		"skills": [
+			{
+				"name": "Critical Eye",
+				"description": "Increases affinity.",
+				"level": 2,
+				"effect": "Increases affinity by 6%.",
+				"modifier": null
+			}
+		]
+	},
+	{
+		"id": 4,
+		"type": "Waist",
+		"name": "Rathalos Coil",
+		"rarity": 5,
+		"defense": 84,
+		"resistances": {
+			"fire": 3,
+			"water": -2,
+			"thunder": 0,
+			"ice": 0,
+			"dragon": -1
+		},
+		"skills": [
+			{
+				"name": "Weakness Exploit",
+				"description": "Increases affinity when attacking monster weak points.",
+				"level": 2,
+				"effect": "Increases affinity by 30% when attacking a monster weak point.",
+				"modifier": null
+			}
+		]
+	},
+	{
+		"id": 5,
+		"type": "Legs",
+		"name": "Rathalos Greaves",
+		"rarity": 5,
+		"defense": 78,
+		"resistances": {
+			"fire": 3,
+			"water": -2,
+			"thunder": 0,
+			"ice": 0,
+			"dragon": -1
+		},
+		"skills": [
+			{
+				"name": "Critical Eye",
+				"description": "Increases affinity.",
+				"level": 1,
+				"effect": "Increases affinity by 3%.",
+				"modifier": null
+			}
+		]
+	},
+	{
+		"id": 6,
+		"type": "Head",
+		"name": "Tigrex Helm",
+		"rarity": 4,
+		"defense": 90,
+		"resistances": {
+			"fire": -2,
+			"water": 2,
+			"thunder": 0,
+			"ice": -1,
+			"dragon": 0
+		},
+		"skills": [
+			{
+				"name": "Critical Eye",
+				"description": "Increases affinity.",
+				"level": 1,
+				"effect": "Increases affinity by 3%.",
+				"modifier": null
+			},
+			{
+				"name": "Weakness Exploit",
+				"description": "Increases affinity when attacking monster weak points.",
+				"level": 2,
+				"effect": "Increases affinity by 30% when attacking a monster weak point.",
+				"modifier": null
+			}
+		]
+	},
+	{
+		"id": 7,
+		"type": "Chest",
+		"name": "Tigrex Mail",
+		"rarity": 4,
+		"defense": 96,
+		"resistances": {
+			"fire": -2,
+			"water": 2,
+			"thunder": 0,
+			"ice": -1,
+			"dragon": 0
+		},
+		"skills": [
+			{
+				"name": "Critical Eye",
+				"description": "Increases affinity.",
+				"level": 1,
+				"effect": "Increases affinity by 3%.",
+				"modifier": null
+			},
+			{
+				"name": "Weakness Exploit",
+				"description": "Increases affinity when attacking monster weak points.",
+				"level": 2,
+				"effect": "Increases affinity by 30% when attacking a monster weak point.",
+				"modifier": null
+			}
+		]
+	},
+	{
+		"id": 8,
+		"type": "Arms",
+		"name": "Tigrex Vambraces",
+		"rarity": 4,
+		"defense": 90,
+		"resistances": {
+			"fire": -2,
+			"water": 2,
+			"thunder": 0,
+			"ice": -1,
+			"dragon": 0
+		},
+		"skills": [
+			{
+				"name": "Critical Eye",
+				"description": "Increases affinity.",
+				"level": 2,
+				"effect": "Increases affinity by 6%.",
+				"modifier": null
+			}
+		]
+	},
+	{
+		"id": 9,
+		"type": "Waist",
+		"name": "Tigrex Coil",
+		"rarity": 4,
+		"defense": 96,
+		"resistances": {
+			"fire": -2,
+			"water": 2,
+			"thunder": 0,
+			"ice": -1,
+			"dragon": 0
+		},
+		"skills": [
+			{
+				"name": "Critical Eye",
+				"description": "Increases affinity.",
+				"level": 1,
+				"effect": "Increases affinity by 3%.",
+				"modifier": null
+			}
+		]
+	},
+	{
+		"id": 10,
+		"type": "Legs",
+		"name": "Tigrex Greaves",
+		"rarity": 4,
+		"defense": 90,
+		"resistances": {
+			"fire": -2,
+			"water": 2,
+			"thunder": 0,
+			"ice": -1,
+			"dragon": 0
+		},
+		"skills": [
+			{
+				"name": "Weakness Exploit",
+				"description": "Increases affinity when attacking monster weak points.",
+				"level": 3,
+				"effect": "Increases affinity by 50% when attacking a monster weak point.",
+				"modifier": null
+			},
+			{
+				"name": "Weakness Exploit",
+				"description": "Increases affinity when attacking monster weak points.",
+				"level": 2,
+				"effect": "Increases affinity by 30% when attacking a monster weak point.",
+				"modifier": null
+			}
+		]
+	}
+]
+
+// Armor
+
+{
+	"id": 1,
+	"type": "Head",
+	"name": "Rathalos Helm",
+	"rarity": 5,
+	"defense": 78,
+	"resistances": {
+		"fire": 3,
+		"water": -2,
+		"thunder": 0,
+		"ice": 0,
+		"dragon": -1
+	},
+	"skills": [
+		{
+			"name": "Critical Eye",
+			"description": "Increases affinity.",
+			"level": 1,
+			"effect": "Increases affinity by 3%.",
+			"modifier": null
+		},
+		{
+			"name": "Weakness Exploit",
+			"description": "Increases affinity when attacking monster weak points.",
+			"level": 3,
+			"effect": "Increases affinity by 50% when attacking a monster weak point.",
+			"modifier": null
+		}
+	]
+}
