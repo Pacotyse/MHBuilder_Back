@@ -5,18 +5,8 @@ const logger = require('../utils/logger');
 require('dotenv').config();
 
 const client = new Client({
-  database: 'mhbuilder',
-  host: 'localhost',
-  user: 'spedata',
-  password: 'spedata',
+  connectionString: process.env.DATABASE_URL,
 });
-
-// const client = new Client({
-//   database: 'mhbuilder',
-//   host: 'localhost',
-//   user: 'mhbuilder',
-//   password: 'mhbuilder',
-// });
 
 client.connect((err) => {
   if (err) throw err;
