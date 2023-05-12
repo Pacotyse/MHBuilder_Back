@@ -1,3 +1,4 @@
+// Middleware to handle all errors from the controller
 const errorMiddleware = function (req, res, next) {
   try {
     next();

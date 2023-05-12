@@ -1,14 +1,16 @@
 const express = require('express');
+const userSchema = require('../schemas/user.schema');
+const validate = require('../middlewares/validate.middleware');
 
 const router = express.Router();
 const { user } = require('../controllers/api.controller');
 
 router.route('/')
   .get(user.getAll)
-  .post(user.createOne);
+  .post(validate(userSchema, 'body'), user.createOne);
 router.route('/:id')
   .get(user.getOne)
-  .put(user.updateOne)
+  .put(validate(userSchema, 'body'), user.updateOne)
   .delete(user.deleteOne);
 
 module.exports = router;
@@ -49,6 +51,19 @@ or null if never updated.
   GET /users/{id}
   @summary Get one user
   @param {integer} id.path.required - ID of the user to get
+  @return {object} 200 - success response
+  @return {User} 200 - User object
+  @returns {object} 404 - error response
+  */
+
+/**
+  PUT /users/{id}
+  @summary Post a new user user
+  @param {integer} id.path.required - ID of the user to get
+  @param {object} request.body.required required - User information
+  @param {string} request.body.email.required required - User information
+  @param {string} request.body.password.required required - User information
+  @param {string} request.body.username.required required - User information
   @return {object} 200 - success response
   @return {User} 200 - User object
   @returns {object} 404 - error response
