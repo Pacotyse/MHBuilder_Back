@@ -39,7 +39,7 @@ or null if never updated.
   */
 
 /**
-  GET /loadouts/:id
+  GET /loadouts/{id}
   @summary Get a loadout by ID
   @param {integer} id.path.required - The ID of the loadout to get
   @return {object} 200 - success response
@@ -48,7 +48,7 @@ or null if never updated.
   */
 
 /**
-  DELETE /loadouts/:id
+  DELETE /loadouts/{id}
   @summary Delete a loadout by ID
   @param {integer} id.path.required - The ID of the loadout to delete
   @return {object} 204 - success response
