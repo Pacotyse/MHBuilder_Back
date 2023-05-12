@@ -15,19 +15,16 @@ router.route('/type/:type')
 module.exports = router;
 
 /**
-Represents an armor object.
-@typedef {object} Armor
-@property {number} id - The unique identifier for the armor.
-@property {string} type - The type of the armor.
-@property {string} name - The name of the armor.
-@property {integer} rarity - The rarity of the armor.
-@property {integer} defense - The defense value of the armor.
-@property {integer} resistance_fire - The fire resistance value of the armor.
-@property {integer} resistance_water - The water resistance value of the armor.
-@property {integer} resistance_thunder - The thunder resistance value of the armor.
-@property {integer} resistance_ice - The ice resistance value of the armor.
-@property {integer} resistance_dragon - The dragon resistance value of the armor.
-*/
+  Represents an armor object.
+  @typedef {object} Armor
+  @property {number} id - The unique identifier for the armor.
+  @property {string} type - The type of the armor.
+  @property {string} name - The name of the armor.
+  @property {number} rarity - The rarity of the armor.
+  @property {number} defense - The defense value of the armor.
+  @property {object} resistances - The resistances of the armor.
+  @property {object} skills - The skills of the armor.
+ */
 
 /**
   GET /armors/

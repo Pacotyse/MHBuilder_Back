@@ -24,18 +24,8 @@ Represents a weapon object.
 @property {integer} attack - The attack of the weapon.
 @property {integer} affinity - The affinity of the weapon.
 @property {string} secret_effect - The secret effect of the weapon.
-@property {integer} sharpness_red - The sharpness value of the weapon in the red zone.
-@property {integer} sharpness_orange - The sharpness value of the weapon in the orange zone.
-@property {integer} sharpness_yellow - The sharpness value of the weapon in the yellow zone.
-@property {integer} sharpness_green - The sharpness value of the weapon in the green zone.
-@property {integer} sharpness_blue - The sharpness value of the weapon in the blue zone.
-@property {integer} sharpness_white - The sharpness value of the weapon in the white zone.
-@property {integer} sharpness_purple - The sharpness value of the weapon in the purple zone.
-@property {integer} element_fire - The fire element of the weapon.
-@property {integer} element_water - The water element of the weapon.
-@property {integer} element_thunder - The thunder element of the weapon.
-@property {integer} element_ice - The ice element of the weapon.
-@property {integer} element_dragon - The dragon element of the weapon.
+@property {object} sharpness - - The sharpness value of the weapon.
+@property {object} element - The elements value of the weapon.
 */
 
 /**
