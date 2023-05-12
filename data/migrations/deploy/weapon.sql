@@ -48,7 +48,8 @@ json_build_object(
 	'yellow', weapon.sharpness_yellow,
 	'green', weapon.sharpness_green,
 	'blue', weapon.sharpness_blue,
-	'white', weapon.sharpness_white
+	'white', weapon.sharpness_white,
+    'purple', weapon.sharpness_purple
 ) AS sharpness,
 json_build_object(
 	'fire', weapon.element_fire,
