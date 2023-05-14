@@ -9,6 +9,7 @@ const skillRouter = require('./skill.router');
 const router = express.Router();
 
 router.use('/users', userRouter);
+// router.use('/users/sing-in', userRouter);
 router.use('/loadouts', loadoutRouter);
 router.use('/armors', armorRouter);
 router.use('/weapons', weaponRouter);

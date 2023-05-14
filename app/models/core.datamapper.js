@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 module.exports = class CoreDatamapper {
   tableName;
 
@@ -23,22 +25,6 @@ module.exports = class CoreDatamapper {
     }
 
     return result.rows[0];
-  }
-
-  async findByType(type) {
-    const preparedQuery = {
-      text: `SELECT * FROM "${this.tableName}" WHERE type = $1`,
-      values: [type],
-    };
-
-    const result = await this.client.query(preparedQuery);
-    console.log(result);
-
-    if (!result.rows[0]) {
-      return null;
-    }
-
-    return result.rows;
   }
 
   /**
@@ -132,5 +118,44 @@ module.exports = class CoreDatamapper {
     const result = await this.client.query(`DELETE FROM "${this.tableName}" WHERE id = $1`, [id]);
     // !! cast un falsy en false
     return !!result.rowCount;
+  }
+
+  async findByType(type) {
+    const preparedQuery = {
+      text: `SELECT * FROM "${this.tableName}" WHERE type = $1`,
+      values: [type],
+    };
+
+    const result = await this.client.query(preparedQuery);
+    if (!result.rows[0]) {
+      return null;
+    }
+
+    return result.rows;
+  }
+
+  /**
+   * Vérifie la présense de l'email et compare le password avec le password haché en BDD
+   * @param {*} email
+   * @param {*} password
+   * @returns {object} l'enregistrement du user
+   */
+  async compareOne(email, password) {
+    const preparedQuery = {
+      text: `SELECT * FROM "${this.tableName}" WHERE email = $1 `,
+      values: [email],
+    };
+    const resultQuery = await this.client.query(preparedQuery);
+    if (!resultQuery.rows[0]) {
+      return null;
+    }
+    // todo ici
+    const passwordMatch = await bcrypt.compare(password, resultQuery.rows[0].password);
+    if (passwordMatch) {
+      console.log('Mot de passe correct');
+      return resultQuery.rows[0];
+    }
+    console.log('Mot de passe incorrect');
+    return null;
   }
 };

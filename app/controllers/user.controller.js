@@ -35,6 +35,12 @@ const userController = {
     const deletedData = await user.delete(userId);
     res.status(201).json(deletedData);
   },
+  async compareOne(req, res) {
+    const { email, password } = req.body;
+    const data = await user.compareOne(email, password);
+    res.json(data);
+  },
+
 };
 
 module.exports = userController;

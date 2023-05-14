@@ -1,13 +1,19 @@
 const express = require('express');
 const userSchema = require('../schemas/user.schema');
 const validate = require('../middlewares/validate.middleware');
+const encryptMiddleware = require('../middlewares/encrypt.middleware');
+// const testMiddleware = require('../middlewares/test.middleware');
 
 const router = express.Router();
 const { user } = require('../controllers/api.controller');
 
 router.route('/')
   .get(user.getAll)
-  .post(validate(userSchema, 'body'), user.createOne);
+  .post(validate(userSchema, 'body'), encryptMiddleware, user.createOne);
+
+router.route('/sign-in/')
+  .post(user.compareOne);
+
 router.route('/:id')
   .get(user.getOne)
   .put(validate(userSchema, 'body'), user.updateOne)
