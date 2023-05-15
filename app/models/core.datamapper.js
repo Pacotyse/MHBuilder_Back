@@ -149,13 +149,10 @@ module.exports = class CoreDatamapper {
     if (!resultQuery.rows[0]) {
       return null;
     }
-    // todo ici
     const passwordMatch = await bcrypt.compare(password, resultQuery.rows[0].password);
     if (passwordMatch) {
-      console.log('Mot de passe correct');
       return resultQuery.rows[0];
     }
-    console.log('Mot de passe incorrect');
     return null;
   }
 };

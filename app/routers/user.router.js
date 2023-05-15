@@ -2,7 +2,6 @@ const express = require('express');
 const userSchema = require('../schemas/user.schema');
 const validate = require('../middlewares/validate.middleware');
 const encryptMiddleware = require('../middlewares/encrypt.middleware');
-// const testMiddleware = require('../middlewares/test.middleware');
 
 const router = express.Router();
 const { user } = require('../controllers/api.controller');
@@ -83,3 +82,12 @@ or null if never updated.
   @return {User} 200 - User object
   @returns {object} 404 - error response
   */
+
+/**
+  POST /users/sign-in/{email, password}
+  @sumary User verification
+  @param {text}
+  @param {text}
+  @return {User} 200 - User object
+  @return {} null - invalide data
+ */
