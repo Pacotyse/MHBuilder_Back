@@ -19,7 +19,7 @@ router.route('/register')
   .post(validate(userSchema, 'body'), encrypt.password, user.createOne);
 
 router.route('/login')
-  .post(login.check);
+  .post(login.authentify);
 
 module.exports = router;
 

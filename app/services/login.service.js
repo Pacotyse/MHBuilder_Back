@@ -1,23 +1,23 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { user } = require('../models/index.datamapper');
 
 module.exports = {
   // eslint-disable-next-line consistent-return
-  async check(req, res) {
+  async authentify(req, res) {
     const { email, password } = req.body;
-    try {
-      const data = await user.findByEmail(email);
-      if (!data) {
-        return res.status(404).json({ error: 'Invalid login' });
-      }
-      const passwordMatch = await bcrypt.compare(password, data.password);
-      if (!passwordMatch) {
-        return res.status(401).json({ error: 'Invalid login' });
-      }
-      res.json(data);
-    } catch (error) {
-      return res.status(500).json({ error: 'Internal Server Error' });
+    const data = await user.findByEmail(email);
+    const passwordMatch = await bcrypt.compare(password, data.password);
+    if (!data || !passwordMatch) {
+      return res.status(400).json({ error: 'Invalid login or password' });
     }
+    const token = jwt.sign({
+      id: data.id,
+      email: data.email,
+      username: data.username,
+      ip: req.ip,
+    }, process.env.JWT_SECRET, { expiresIn: 30 });
+    return res.json({ token });
   },
 };
