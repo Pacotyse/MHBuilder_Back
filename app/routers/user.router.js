@@ -1,22 +1,25 @@
 const express = require('express');
 const userSchema = require('../schemas/user.schema');
 const validate = require('../middlewares/validate.middleware');
-const encryptMiddleware = require('../middlewares/encrypt.middleware');
+const login = require('../services/login.service');
+const encrypt = require('../middlewares/encrypt.middleware');
 
 const router = express.Router();
 const { user } = require('../controllers/api.controller');
 
 router.route('/')
-  .get(user.getAll)
-  .post(validate(userSchema, 'body'), encryptMiddleware, user.createOne);
-
-router.route('/sign-in/')
-  .post(user.compareOne);
+  .get(user.getAll);
 
 router.route('/:id')
   .get(user.getOne)
-  .put(validate(userSchema, 'body'), user.updateOne)
+  .put(user.updateOne)
   .delete(user.deleteOne);
+
+router.route('/register')
+  .post(validate(userSchema, 'body'), encrypt.password, user.createOne);
+
+router.route('/login')
+  .post(login.check);
 
 module.exports = router;
 
@@ -37,18 +40,6 @@ or null if never updated.
   @summary Get one user
   @return {object} 200 - success response
   @return {Array.<User>} 200 - User object
-  @returns {object} 404 - error response
-  */
-
-/**
-  POST /users/
-  @summary Post a new user user
-  @param {object} request.body.required required - User information
-  @param {string} request.body.email.required required - User information
-  @param {string} request.body.password.required required - User information
-  @param {string} request.body.username.required required - User information
-  @return {object} 200 - success response
-  @return {User} 200 - User object
   @returns {object} 404 - error response
   */
 
@@ -84,10 +75,22 @@ or null if never updated.
   */
 
 /**
-  POST /users/sign-in/{email, password}
-  @sumary User verification
-  @param {text}
-  @param {text}
+  POST /users/register
+  @summary Register a new user
+  @param {object} request.body.required required - User information
+  @param {string} request.body.email.required required - User information
+  @param {string} request.body.password.required required - User information
+  @param {string} request.body.username.required required - User information
+  @return {object} 200 - success response
   @return {User} 200 - User object
-  @return {} null - invalide data
+  @returns {object} 404 - error response
+  */
+
+/**
+  POST /users/login {email, password}
+  @sumary User verification
+  @param {string} request.body.email.required required - User information
+  @param {string} request.body.password.required required - User information
+  @return {User} 200 - User object
+  @returns {object} 404 - error response
  */

@@ -1,5 +1,3 @@
-const bcrypt = require('bcrypt');
-
 module.exports = class CoreDatamapper {
   tableName;
 
@@ -12,6 +10,7 @@ module.exports = class CoreDatamapper {
          * @param {number} id identifiant
          * @returns {object} un enregistrement
          */
+
   async findByPk(id) {
     const preparedQuery = {
       text: `SELECT * FROM "${this.tableName}" WHERE id = $1`,
@@ -25,6 +24,26 @@ module.exports = class CoreDatamapper {
     }
 
     return result.rows[0];
+  }
+
+  /**
+         * Récupération par type
+         * @param {string} type identifiant
+         * @returns {object} un enregistrement
+         */
+
+  async findByType(type) {
+    const preparedQuery = {
+      text: `SELECT * FROM "${this.tableName}" WHERE type = $1`,
+      values: [type],
+    };
+
+    const result = await this.client.query(preparedQuery);
+    if (!result.rows[0]) {
+      return null;
+    }
+
+    return result.rows;
   }
 
   /**
@@ -79,6 +98,7 @@ module.exports = class CoreDatamapper {
          * l'identifiant de l'enregistrement
          * @returns {object} l'enregistrement mis à jour
          */
+
   async update({ id, ...inputData }) {
     const fieldsAndPlaceholders = [];
     let indexPlaceholder = 1;
@@ -114,45 +134,10 @@ module.exports = class CoreDatamapper {
          * @param {number} id
          * @returns {boolean} nombre d'enregistrement supprimés
         */
+
   async delete(id) {
     const result = await this.client.query(`DELETE FROM "${this.tableName}" WHERE id = $1`, [id]);
     // !! cast un falsy en false
     return !!result.rowCount;
-  }
-
-  async findByType(type) {
-    const preparedQuery = {
-      text: `SELECT * FROM "${this.tableName}" WHERE type = $1`,
-      values: [type],
-    };
-
-    const result = await this.client.query(preparedQuery);
-    if (!result.rows[0]) {
-      return null;
-    }
-
-    return result.rows;
-  }
-
-  /**
-   * Vérifie la présense de l'email et compare le password avec le password haché en BDD
-   * @param {*} email
-   * @param {*} password
-   * @returns {object} l'enregistrement du user
-   */
-  async compareOne(email, password) {
-    const preparedQuery = {
-      text: `SELECT * FROM "${this.tableName}" WHERE email = $1 `,
-      values: [email],
-    };
-    const resultQuery = await this.client.query(preparedQuery);
-    if (!resultQuery.rows[0]) {
-      return null;
-    }
-    const passwordMatch = await bcrypt.compare(password, resultQuery.rows[0].password);
-    if (passwordMatch) {
-      return resultQuery.rows[0];
-    }
-    return null;
   }
 };

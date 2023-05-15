@@ -1,7 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const express = require('express');
-// eslint-disable-next-line import/no-extraneous-dependencies
 const cors = require('cors');
-// eslint-disable-next-line import/no-extraneous-dependencies
 const expressJSDocSwagger = require('express-jsdoc-swagger');
 const bodyParser = require('body-parser');
 const errorMiddleware = require('./middlewares/error.middleware');

@@ -1,36 +1,20 @@
+// Middleware to encrypt password for the user Login
+
+// eslint-disable-next-line import/no-extraneous-dependencies
 const bcrypt = require('bcrypt');
-/**
- * génère un le hash du password passé en paramètre
- * @param {*} password
- * @returns le hash du password ou null si erreur
- */
-async function hashPassword(password) {
-  try {
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
-    return hash;
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
-}
 
-/**
- * Dans la route POST /users/,  intercepte le Json, code le password et le réinject dans le json
- * @param {*} req
- * @param {*} res
- * @param {*} next
- */
-async function encryptMiddleware(req, res, next) {
-  const { password } = req.body;
-  const result = await hashPassword(password);
+// Encrypted password by salt = 10
+const saltRounds = 10;
 
-  if (result != null) {
-    req.body.password = result;
-    next();
-  } else {
-    res.status(500).send({ message: 'Erreur lors du hachage du mot de passe.' });
-  }
-}
-
-module.exports = encryptMiddleware;
+module.exports = {
+  async password(req, res, next) {
+    const { password } = req.body;
+    try {
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      req.body.password = hashedPassword;
+      next();
+    } catch (error) {
+      res.status(500).send({ message: 'Erreur lors du hachage du mot de passe.' });
+    }
+  },
+};
