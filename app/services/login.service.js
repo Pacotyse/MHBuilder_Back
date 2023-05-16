@@ -8,8 +8,11 @@ module.exports = {
   async authentify(req, res) {
     const { email, password } = req.body;
     const data = await user.findByEmail(email);
+    if (!data) {
+      return res.status(400).json({ error: 'Invalid login or password' });
+    }
     const passwordMatch = await bcrypt.compare(password, data.password);
-    if (!data || !passwordMatch) {
+    if (!passwordMatch) {
       return res.status(400).json({ error: 'Invalid login or password' });
     }
     const token = jwt.sign({

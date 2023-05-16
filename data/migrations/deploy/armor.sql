@@ -71,9 +71,11 @@ SELECT
     AS resistances,
     json_agg(
         json_build_object(
+            'id', skill.id,
             'name', skill.name,
             'description', skill.description,
             'level', armor_has_skill.level,
+            'level_max', skill.level_max,
             'effect', effect.description,
 			'modifier', effect.modifier_1
         )
