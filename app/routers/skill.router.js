@@ -23,14 +23,16 @@ module.exports = router;
 
 /**
  * GET /skills/
+ * @tags Skill
  * @summary Get all skills
  * @return {object} 200 - Success response
- * @return {Array.<Skill>} 200 - Array of Skill objects
+ * @return {array<Skill>} 200 - Array of Skill objects
  * @return {object} 404 - Error response
  */
 
 /**
  * GET /skills/{id}
+ * @tags Skill
  * @summary Get one skill
  * @param {integer} id.path.required - ID of the skill to get
  * @return {object} 200 - Success response

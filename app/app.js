@@ -3,13 +3,14 @@ const express = require('express');
 const cors = require('cors');
 const expressJSDocSwagger = require('express-jsdoc-swagger');
 const bodyParser = require('body-parser');
-const errorMiddleware = require('./middlewares/error.middleware');
+const swagger = require('./docs/swagger.json');
+const error = require('./middlewares/error.middleware');
 const routerApi = require('./routers/api.router');
 
 const options = {
   info: {
     version: '1.0.0',
-    title: 'Monster Hunter Builder API',
+    title: 'Monster Hunter Sunbreak API',
     description: 'API MH',
   },
   // Base directory which we use to locate your JSDOC files
@@ -36,11 +37,11 @@ const options = {
 
 const app = express();
 
-expressJSDocSwagger(app)(options);
+expressJSDocSwagger(app)(options, swagger);
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
-app.use(errorMiddleware.errorMiddleware);
+app.use(error.check);
 app.use(routerApi);
 
 module.exports = app;

@@ -1,7 +1,7 @@
 // Handle and cath errors from routes
 
 module.exports = {
-  errorMiddleware(req, res, next) {
+  check(req, res, next) {
     try {
       next();
     } catch (error) {

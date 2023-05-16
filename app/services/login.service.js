@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { user } = require('../models/index.datamapper');
@@ -17,7 +17,7 @@ module.exports = {
       email: data.email,
       username: data.username,
       ip: req.ip,
-    }, process.env.JWT_SECRET, { expiresIn: 30 });
+    }, process.env.JWT_SECRET, { expiresIn: 3600 });
     return res.json({ token });
   },
 };

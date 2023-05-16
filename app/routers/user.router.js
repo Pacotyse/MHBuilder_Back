@@ -3,6 +3,7 @@ const userSchema = require('../schemas/user.schema');
 const validate = require('../middlewares/validate.middleware');
 const login = require('../services/login.service');
 const encrypt = require('../middlewares/encrypt.middleware');
+const token = require('../middlewares/token.middleware');
 
 const router = express.Router();
 const { user } = require('../controllers/api.controller');
@@ -12,8 +13,8 @@ router.route('/')
 
 router.route('/:id')
   .get(user.getOne)
-  .put(user.updateOne)
-  .delete(user.deleteOne);
+  .put(token.authentification, user.updateOne)
+  .delete(token.authentification, user.deleteOne);
 
 router.route('/register')
   .post(validate(userSchema, 'body'), encrypt.password, user.createOne);
@@ -24,73 +25,29 @@ router.route('/login')
 module.exports = router;
 
 /**
-Represents a user object.
-@typedef {object} User
-@property {number} id - The unique identifier for the user.
-@property {string} email - The user's email address.
-@property {string} password - The user's password.
-@property {string} username - The user's username.
-@property {string} created_at - The date and time the user was created.
-@property {string|null} updated_at - The date and time the user was last updated,
-or null if never updated.
-*/
+ * Represents a User object.
+ * @typedef {object} User
+ * @property {integer} id - User ID
+ * @property {string} email - User email
+ * @property {string} password - User password
+ * @property {string} username - User username
+ * @property {string} created_at - User created at
+ * @property {string} updated_at - User updated at
+ */
 
 /**
-  GET /users/
-  @summary Get one user
-  @return {object} 200 - success response
-  @return {Array.<User>} 200 - User object
-  @returns {object} 404 - error response
-  */
+ * GET /users
+ * @tags User
+ * @summary Get all user
+ * @return {array<User>} 200 - An array of user info
+ * @return {object} 404 - error response
+ */
 
 /**
-  GET /users/{id}
-  @summary Get one user
-  @param {integer} id.path.required - ID of the user to get
-  @return {object} 200 - success response
-  @return {User} 200 - User object
-  @returns {object} 404 - error response
-  */
-
-/**
-  PUT /users/{id}
-  @summary Post a new user user
-  @param {integer} id.path.required - ID of the user to get
-  @param {object} request.body.required required - User information
-  @param {string} request.body.email.required required - User information
-  @param {string} request.body.password.required required - User information
-  @param {string} request.body.username.required required - User information
-  @return {object} 200 - success response
-  @return {User} 200 - User object
-  @returns {object} 404 - error response
-  */
-
-/**
-  DELETE /users/{id}
-  @summary Delete a user
-  @param {integer} id.path.required - ID of the user to get
-  @return {object} 200 - success response
-  @return {User} 200 - User object
-  @returns {object} 404 - error response
-  */
-
-/**
-  POST /users/register
-  @summary Register a new user
-  @param {object} request.body.required required - User information
-  @param {string} request.body.email.required required - User information
-  @param {string} request.body.password.required required - User information
-  @param {string} request.body.username.required required - User information
-  @return {object} 200 - success response
-  @return {User} 200 - User object
-  @returns {object} 404 - error response
-  */
-
-/**
-  POST /users/login {email, password}
-  @sumary User verification
-  @param {string} request.body.email.required required - User information
-  @param {string} request.body.password.required required - User information
-  @return {User} 200 - User object
-  @returns {object} 404 - error response
+ * GET /users/{id}
+ * @tags User
+ * @summary Get user by id
+ * @param {number} id.path.required - User id
+ * @return {User} 200 - An object of user info
+ * @return {object} 404 - error response
  */
