@@ -21,6 +21,6 @@ module.exports = {
       username: data.username,
       ip: req.ip,
     }, process.env.JWT_SECRET, { expiresIn: 3600 });
-    return res.json({ token });
+    return res.json({ id: data.id, username: data.username, token });
   },
 };
