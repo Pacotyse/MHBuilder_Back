@@ -42,6 +42,28 @@ module.exports = class CoreDatamapper {
   }
 
   /**
+ * Utilisé avec la table loadout.
+ * Permet de récuperer les loadouts par user_id
+ * @param {*} id
+ * @returns {object[]} une liste d'enregistrements
+ */
+  async findByUserId(id) {
+    const preparedQuery = {
+      text: `SELECT * FROM "${this.tableName}" WHERE user_id = $1`,
+      values: [id],
+    };
+
+    const result = await this.client.query(preparedQuery);
+    console.log(result);
+
+    if (!result.rows[0]) {
+      return null;
+    }
+
+    return result.rows;
+  }
+
+  /**
          * Permet de récupérer l'ensemble des enregistrement
          * d'une table ou une liste d'enregistrement.
          * @returns {object[]} une liste d'enregistrements

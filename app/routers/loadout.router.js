@@ -10,6 +10,8 @@ router.route('/:id')
   .get(loadout.getOne)
   .put(loadout.updateOne)
   .delete(loadout.deleteOne);
+router.route('/user/:id')
+  .get(loadout.getByUserId);
 
 module.exports = router;
 
@@ -42,6 +44,14 @@ or null if never updated.
   GET /loadouts/{id}
   @summary Get a loadout by ID
   @param {integer} id.path.required - The ID of the loadout to get
+  @return {object} 200 - success response
+  @return {Loadout} 200 - The Loadout object
+  @returns {object} 404 - error response
+  */
+/**
+  GET /loadouts/user/id}
+  @summary Get a user loadout by user_id
+  @param {integer} id.path.required - The user_id of the loadout to get
   @return {object} 200 - success response
   @return {Loadout} 200 - The Loadout object
   @returns {object} 404 - error response

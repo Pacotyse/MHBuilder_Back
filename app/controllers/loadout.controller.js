@@ -11,6 +11,12 @@ const loadoutController = {
     const data = await loadout.findByPk(id);
     res.json(data);
   },
+  // todo ------>
+  async getByUserId(req, res) {
+    const { id } = req.params;
+    const data = await loadout.findByUserId(id);
+    res.json(data);
+  },
   async createOne(req, res) {
     const {
       name, description, weapon_id,
