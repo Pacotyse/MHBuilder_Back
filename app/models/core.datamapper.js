@@ -27,26 +27,6 @@ module.exports = class CoreDatamapper {
   }
 
   /**
-         * Récupération par type
-         * @param {string} type identifiant
-         * @returns {object} un enregistrement
-         */
-
-  async findByType(type) {
-    const preparedQuery = {
-      text: `SELECT * FROM "${this.tableName}" WHERE type = $1`,
-      values: [type],
-    };
-
-    const result = await this.client.query(preparedQuery);
-    if (!result.rows[0]) {
-      return null;
-    }
-
-    return result.rows;
-  }
-
-  /**
          * Permet de récupérer l'ensemble des enregistrement
          * d'une table ou une liste d'enregistrement.
          * @returns {object[]} une liste d'enregistrements
@@ -54,6 +34,29 @@ module.exports = class CoreDatamapper {
 
   async findAll() {
     const result = await this.client.query(`SELECT * FROM "${this.tableName}"`);
+
+    return result.rows;
+  }
+
+  /**
+          * Utilisé avec la table loadout.
+          * Permet de récupérer les loadouts en fonction d'un champ spécifié.
+          * @param {string} field - Champ sur lequel effectuer la recherche (ex. "user_id")
+          * @param {*} value - Valeur du champ pour filtrer les résultats
+          * @returns {object[]} - Une liste d'enregistrements correspondant aux
+          * critères de recherche
+          */
+  async findAllBy(field, value) {
+    const preparedQuery = {
+      text: `SELECT * FROM "${this.tableName}" WHERE ${field} = $1`,
+      values: [value],
+    };
+
+    const result = await this.client.query(preparedQuery);
+
+    if (!result.rows[0]) {
+      return null;
+    }
 
     return result.rows;
   }
