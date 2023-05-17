@@ -59,6 +59,7 @@ CREATE VIEW armor_data AS
 SELECT 
     armor.id, 
     armor.type, 
+    CONCAT(armor.type, '_', armor.rarity) AS icon,
     armor.name, 
     armor.rarity, 
     armor.defense, 

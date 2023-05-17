@@ -26,16 +26,17 @@ CREATE TABLE "weapon" (
 );
 
 INSERT INTO "weapon" ("type", "name", "rarity", "attack", "affinity", "defense_bonus", "secret_effect", "sharpness_red", "sharpness_orange", "sharpness_yellow", "sharpness_green", "sharpness_blue", "sharpness_white", "sharpness_purple", "element_fire", "element_water", "element_thunder", "element_ice", "element_dragon") VALUES 
-('great-sword', 'Wyvern Jawblade', 8, 220, -20, 0, 'None', 48, 20, null, null, null, null, null, null, null, null, null, null),
-('great-sword', 'Anguish', 8, 240,0, 0, 'None', 50, 30, null, null, null, null, null, null, null, null, null, null),
-('long-sword', 'Divine Slasher', 8, 180, 0, 0, 'None', 20, 20, 10, null, null, null, null, null, null, null, null, null),
-('long-sword', 'Reaver Calamity', 8, 170, 0, 0, 'None', 40, 30, 20, null, null, null, null, null, null, null, null, null),
-('sword-and-shield', 'Master Bang', 8, 120, 0, 0, 'None', 12, 20, null, null, null, null, null, 200, null, null, null, null),
-('sword-and-shield', 'Teostra Emblem', 8, 110, 0, 0, 'None', 20, 15, null, null, null, null, null, 240, null, null, null, null);
+('great_sword', 'Wyvern Jawblade', 8, 220, -20, 0, 'None', 48, 20, null, null, null, null, null, null, null, null, null, null),
+('great_sword', 'Anguish', 8, 240,0, 0, 'None', 50, 30, null, null, null, null, null, null, null, null, null, null),
+('long_sword', 'Divine Slasher', 8, 180, 0, 0, 'None', 20, 20, 10, null, null, null, null, null, null, null, null, null),
+('long_sword', 'Reaver Calamity', 8, 170, 0, 0, 'None', 40, 30, 20, null, null, null, null, null, null, null, null, null),
+('sword_and_shield', 'Master Bang', 8, 120, 0, 0, 'None', 12, 20, null, null, null, null, null, 200, null, null, null, null),
+('sword_and_shield', 'Teostra Emblem', 8, 110, 0, 0, 'None', 20, 15, null, null, null, null, null, 240, null, null, null, null);
 
 CREATE VIEW weapon_data AS 
 SELECT weapon.id, 
 weapon.type, 
+CONCAT(weapon.type, '_', weapon.rarity) AS icon,
 weapon.name, 
 weapon.rarity,
 weapon.attack,
