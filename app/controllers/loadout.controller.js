@@ -11,10 +11,9 @@ const loadoutController = {
     const data = await loadout.findByPk(id);
     res.json(data);
   },
-  // todo ------>
-  async getByUserId(req, res) {
+  async getAllByUser(req, res) {
     const { id } = req.params;
-    const data = await loadout.findByUserId(id);
+    const data = await loadout.findAllBy('user_id', id);
     res.json(data);
   },
   async createOne(req, res) {

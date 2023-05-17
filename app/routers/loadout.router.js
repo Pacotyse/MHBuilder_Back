@@ -11,7 +11,7 @@ router.route('/:id')
   .put(loadout.updateOne)
   .delete(loadout.deleteOne);
 router.route('/user/:id')
-  .get(loadout.getByUserId);
+  .get(loadout.getAllByUser);
 
 module.exports = router;
 

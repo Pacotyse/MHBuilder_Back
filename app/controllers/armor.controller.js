@@ -7,7 +7,7 @@ const armorController = {
   },
   async getByType(req, res) {
     const { type } = req.params;
-    const data = await armor.findByType(type);
+    const data = await armor.findAllBy('type', type);
     res.json(data);
   },
   async getOne(req, res) {
