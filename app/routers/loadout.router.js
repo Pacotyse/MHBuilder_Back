@@ -1,15 +1,16 @@
 const express = require('express');
+const token = require('../middlewares/token.middleware');
 
 const router = express.Router();
 const { loadout } = require('../controllers/api.controller');
 
 router.route('/')
   .get(loadout.getAll)
-  .post(loadout.createOne);
+  .post(token.authentification, loadout.createOne);
 router.route('/:id')
   .get(loadout.getOne)
-  .put(loadout.updateOne)
-  .delete(loadout.deleteOne);
+  .put(token.authentification, loadout.updateOne)
+  .delete(token.authentification, loadout.deleteOne);
 router.route('/user/:id')
   .get(loadout.getAllByUser);
 
