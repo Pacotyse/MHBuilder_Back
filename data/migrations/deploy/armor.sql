@@ -39,7 +39,7 @@ VALUES
 -- Seeding armor_has_skill to link skill and armor
 INSERT INTO "armor_has_skill" ("armor_id", "skill_id", "level")
 VALUES 
-(1, 1, 1),
+(1, 4, 7),
 (1, 2, 3), 
 (2, 2, 1),
 (3, 1, 2),
@@ -78,7 +78,9 @@ SELECT
             'level', armor_has_skill.level,
             'level_max', skill.level_max,
             'effect', effect.description,
-			'modifier', effect.modifier_1
+			'modifier_filed', effect.modifier_field,
+            'modifier_operator', effect.modifier_operator,
+            'modifier_value', effect.modifier_value
         )
     ) as skills
 FROM armor

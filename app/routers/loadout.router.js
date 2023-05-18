@@ -1,5 +1,6 @@
 const express = require('express');
 const token = require('../middlewares/token.middleware');
+const calcul = require('../services/calcul.service');
 
 const router = express.Router();
 const { loadout } = require('../controllers/api.controller');
@@ -11,6 +12,8 @@ router.route('/:id')
   .get(loadout.getOne)
   .put(token.authentification, loadout.updateOne)
   .delete(token.authentification, loadout.deleteOne);
+router.route('/details')
+  .post(calcul.stats);
 router.route('/user/:id')
   .get(loadout.getAllByUser);
 
