@@ -42,9 +42,7 @@ INSERT INTO "effect" ("skill_id", "level", "description","modifier_field", "modi
 (3, 2, 'Attack +8 and affinity +6% when monster is enraged.', NULL, NULL, NULL),
 (3, 3, 'Attack +12 and affinity +9% when monster is enraged.', NULL, NULL, NULL),
 (3, 4, 'Attack +16 and affinity +12% when monster is enraged.', NULL, NULL, NULL),
-(3, 5, 'Attack +20 and affinity +15% when monster is enraged.', NULL, NULL, NULL);
-
-INSERT INTO "effect" ("skill_id", "level", "description", "modifier_field", "modifier_operator", "modifier_value") VALUES 
+(3, 5, 'Attack +20 and affinity +15% when monster is enraged.', NULL, NULL, NULL),
 (4, 1, 'Increases attack by 5.', 'attack', '+', 5),
 (4, 2, 'Increases attack by 10.', 'attack', '+', 10),
 (4, 3, 'Increases attack by 15.', 'attack', '+', 15),

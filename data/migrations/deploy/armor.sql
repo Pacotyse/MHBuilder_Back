@@ -68,25 +68,20 @@ SELECT
         'water', armor.resistance_water, 
         'thunder', armor.resistance_thunder, 
         'ice', armor.resistance_ice, 
-        'dragon', armor.resistance_dragon) 
+        'dragon', armor.resistance_dragon
+        ) 
     AS resistances,
     json_agg(
         json_build_object(
             'id', skill.id,
             'name', skill.name,
-            'description', skill.description,
             'level', armor_has_skill.level,
-            'level_max', skill.level_max,
-            'effect', effect.description,
-			'modifier_filed', effect.modifier_field,
-            'modifier_operator', effect.modifier_operator,
-            'modifier_value', effect.modifier_value
+            'level_max', skill.level_max
         )
     ) as skills
 FROM armor
 JOIN armor_has_skill ON armor_id = armor.id
 JOIN skill ON skill.id = armor_has_skill.skill_id
-JOIN effect ON skill.id = effect.skill_id AND armor_has_skill.level = effect.level
 GROUP BY armor.id;
 
 COMMIT;

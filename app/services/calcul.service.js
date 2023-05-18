@@ -4,6 +4,7 @@ const { skill } = require('../models/index.datamapper');
 module.exports = {
   async stats(req, res) {
     const data = req.body;
+    console.log(data);
 
     const stats = {
       attack: 0,
@@ -53,6 +54,9 @@ module.exports = {
           const existingSkill = stats.skills.find((s) => s.id === oneSkill.id);
           if (existingSkill) {
             existingSkill.level += oneSkill.level;
+            if (existingSkill.level > oneSkill.level_max) {
+              existingSkill.level = oneSkill.level_max;
+            }
           } else {
             stats.skills.push({
               id: oneSkill.id,
