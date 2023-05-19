@@ -87,6 +87,7 @@ module.exports = {
     }
 
     for (const oneSkill of stats.skills) {
+      // eslint-disable-next-line no-await-in-loop
       const dataSkill = await skill.findEffect(oneSkill.id, oneSkill.level);
       if (dataSkill && dataSkill.modifier_field) {
         const field = dataSkill.modifier_field;
