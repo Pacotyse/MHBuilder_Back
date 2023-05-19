@@ -39,7 +39,7 @@ VALUES
 -- Seeding armor_has_skill to link skill and armor
 INSERT INTO "armor_has_skill" ("armor_id", "skill_id", "level")
 VALUES 
-(1, 1, 1),
+(1, 4, 7),
 (1, 2, 3), 
 (2, 2, 1),
 (3, 1, 2),
@@ -59,6 +59,7 @@ CREATE VIEW armor_data AS
 SELECT 
     armor.id, 
     armor.type, 
+    CONCAT(armor.type, '_', armor.rarity) AS icon,
     armor.name, 
     armor.rarity, 
     armor.defense, 
@@ -67,23 +68,21 @@ SELECT
         'water', armor.resistance_water, 
         'thunder', armor.resistance_thunder, 
         'ice', armor.resistance_ice, 
-        'dragon', armor.resistance_dragon) 
+        'dragon', armor.resistance_dragon
+        ) 
     AS resistances,
     json_agg(
         json_build_object(
             'id', skill.id,
             'name', skill.name,
-            'description', skill.description,
             'level', armor_has_skill.level,
             'level_max', skill.level_max,
-            'effect', effect.description,
-			'modifier', effect.modifier_1
+            'color', skill.color 
         )
     ) as skills
 FROM armor
 JOIN armor_has_skill ON armor_id = armor.id
 JOIN skill ON skill.id = armor_has_skill.skill_id
-JOIN effect ON skill.id = effect.skill_id AND armor_has_skill.level = effect.level
 GROUP BY armor.id;
 
 COMMIT;

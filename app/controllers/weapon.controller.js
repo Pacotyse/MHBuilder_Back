@@ -5,9 +5,9 @@ const weaponController = {
     const data = await weapon.findAll();
     res.json(data);
   },
-  async getByType(req, res) {
+  async getAllByType(req, res) {
     const { type } = req.params;
-    const data = await weapon.findByType(type);
+    const data = await weapon.findAllBy('type', type);
     res.json(data);
   },
   async getOne(req, res) {

@@ -10,7 +10,7 @@ router.route('/:id')
   .get(weapon.getOne);
 
 router.route('/type/:type')
-  .get(weapon.getByType);
+  .get(weapon.getAllByType);
 
 module.exports = router;
 

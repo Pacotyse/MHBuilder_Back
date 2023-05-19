@@ -1,15 +1,21 @@
 const express = require('express');
+const token = require('../middlewares/token.middleware');
+const calcul = require('../services/calcul.service');
 
 const router = express.Router();
 const { loadout } = require('../controllers/api.controller');
 
 router.route('/')
   .get(loadout.getAll)
-  .post(loadout.createOne);
+  .post(token.authentification, loadout.createOne);
 router.route('/:id')
   .get(loadout.getOne)
-  .put(loadout.updateOne)
-  .delete(loadout.deleteOne);
+  .put(token.authentification, loadout.updateOne)
+  .delete(token.authentification, loadout.deleteOne);
+router.route('/details')
+  .post(calcul.stats);
+router.route('/user/:id')
+  .get(loadout.getAllByUser);
 
 module.exports = router;
 
@@ -47,5 +53,15 @@ module.exports = router;
  * @param {integer} id.path.required - The ID of the loadout to get
  * @return {object} 200 - success response
  * @return {Loadout} 200 - The Loadout object
+ * @returns {object} 404 - error response
+ */
+
+/**
+ * GET /loadouts/user/{id}
+ * @tags Loadout
+ * @summary Get all loadouts
+ * @param {integer} id.path.required - The ID of user
+ * @return {object} 200 - success response
+ * @return {array<Loadout>} 200 - An array of Loadout objects
  * @returns {object} 404 - error response
  */

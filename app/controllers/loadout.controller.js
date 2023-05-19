@@ -11,6 +11,11 @@ const loadoutController = {
     const data = await loadout.findByPk(id);
     res.json(data);
   },
+  async getAllByUser(req, res) {
+    const { id } = req.params;
+    const data = await loadout.findAllBy('user_id', id);
+    res.json(data);
+  },
   async createOne(req, res) {
     const {
       name, description, weapon_id,

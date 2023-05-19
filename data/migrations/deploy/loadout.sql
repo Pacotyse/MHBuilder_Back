@@ -2,8 +2,25 @@
 
 BEGIN;
 
+-- Function to generate random ID for loadout
+CREATE OR REPLACE FUNCTION generate_uid(size INT) RETURNS TEXT AS $$
+DECLARE
+  characters TEXT := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  bytes BYTEA := gen_random_bytes(size);
+  l INT := length(characters);
+  i INT := 0;
+  output TEXT := '';
+BEGIN
+  WHILE i < size LOOP
+    output := output || substr(characters, get_byte(bytes, i) % l + 1, 1);
+    i := i + 1;
+  END LOOP;
+  RETURN output;
+END;
+$$ LANGUAGE plpgsql VOLATILE;
+
 CREATE TABLE "loadout" (
-    "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "id" TEXT PRIMARY KEY DEFAULT generate_uid(7),
     "name" TEXT NOT NULL UNIQUE,
     "description" TEXT,
     "user_id" INTEGER NOT NULL REFERENCES "user"("id"),
@@ -17,9 +34,8 @@ CREATE TABLE "loadout" (
     "updated_at" TIMESTAMPTZ
 );
 
-
 INSERT INTO "loadout" ("name", "description", "user_id", "weapon_id", "head_id", "chest_id", "arms_id", "waist_id", "legs_id") VALUES
-('Loadout 1', 'Description of loadout 1', 1, 1, 2, 3, 4, 5, 6),
+('Loadout 1', 'Description of loadout 1', 1, 1, 1, 2, 3, 4, 5),
 ('Loadout 2', 'Description of loadout 2', 2, 2, 4, 3, 2, 1, 5);
 
 CREATE VIEW loadout_data AS 
@@ -32,11 +48,12 @@ SELECT
       'type', weapon_data.type,
       'name', weapon_data.name,
       'rarity', weapon_data.rarity,
+      'attack', weapon_data.attack,
       'affinity', weapon_data.affinity,
-      'defense_bonus', weapon_data.defense_bonus,
-      'secret_effect', weapon_data.secret_effect,
+      'element', weapon_data.element,
       'sharpness', weapon_data.sharpness,
-      'element', weapon_data.element
+      'defense_bonus', weapon_data.defense_bonus,
+      'secret_effect', weapon_data.secret_effect  
   ) AS weapon,
   json_build_object(
       'id', head_armor.id,
