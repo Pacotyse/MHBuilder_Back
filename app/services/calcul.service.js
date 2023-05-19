@@ -4,7 +4,6 @@ const { skill } = require('../models/index.datamapper');
 module.exports = {
   async stats(req, res) {
     const data = req.body;
-    console.log(data);
 
     const stats = {
       attack: 0,
@@ -15,6 +14,16 @@ module.exports = {
         thunder: 0,
         ice: 0,
         dragon: 0,
+      },
+      sharpness: {
+        red: 0,
+        orange: 0,
+        yellow: 0,
+        green: 0,
+        blue: 0,
+        white: 0,
+        purple: 0,
+        inactiv: 0,
       },
       defense: 0,
       resistances: {
@@ -34,6 +43,14 @@ module.exports = {
 
       if (loadoutPiece && loadoutPiece.affinity) {
         stats.affinity += loadoutPiece.affinity;
+      }
+
+      if (loadoutPiece && loadoutPiece.sharpness) {
+        for (const [sharpness, value] of Object.entries(loadoutPiece.sharpness)) {
+          if (value != null) {
+            stats.sharpness[sharpness] += value;
+          }
+        }
       }
 
       if (loadoutPiece && loadoutPiece.defense) {
@@ -82,11 +99,15 @@ module.exports = {
             stats[object][element] += value;
           } else if (operator === '*') {
             stats[object][element] *= value;
+          } else if (operator === '-') {
+            stats[object][element] *= value;
           }
         } else if (operator === '+') {
           stats[field] += value;
         } else if (operator === '*') {
           stats[field] *= value;
+        } else if (operator === '-') {
+          stats[field] -= value;
         }
       }
     }

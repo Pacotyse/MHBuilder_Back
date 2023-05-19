@@ -17,7 +17,8 @@ CREATE TABLE "weapon" (
     "sharpness_green" INTEGER,
     "sharpness_blue" INTEGER,
     "sharpness_white" INTEGER,
-    "sharpness_purple" INTEGER
+    "sharpness_purple" INTEGER,
+    "sharpness_inactiv" INTEGER NOT NULL DEFAULT 50
 );
 
 INSERT INTO "weapon" ("type", "name", "rarity", "attack", "affinity", "defense_bonus", "secret_effect", "sharpness_red", "sharpness_orange", "sharpness_yellow", "sharpness_green", "sharpness_blue", "sharpness_white", "sharpness_purple") 
@@ -83,7 +84,8 @@ json_build_object(
     'green', weapon.sharpness_green,
     'blue', weapon.sharpness_blue,
     'white', weapon.sharpness_white,
-    'purple', weapon.sharpness_purple
+    'purple', weapon.sharpness_purple,
+    'inactiv', weapon.sharpness_inactiv
 ) AS sharpness,
 weapon.defense_bonus, 
 weapon.secret_effect
