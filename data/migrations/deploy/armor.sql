@@ -76,7 +76,8 @@ SELECT
             'id', skill.id,
             'name', skill.name,
             'level', armor_has_skill.level,
-            'level_max', skill.level_max
+            'level_max', skill.level_max,
+            'color', skill.color 
         )
     ) as skills
 FROM armor

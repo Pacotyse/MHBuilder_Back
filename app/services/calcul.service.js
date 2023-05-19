@@ -80,6 +80,7 @@ module.exports = {
               name: oneSkill.name,
               level: oneSkill.level,
               level_max: oneSkill.level_max,
+              color: oneSkill.color,
             });
           }
         }

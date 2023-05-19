@@ -20,7 +20,7 @@ END;
 $$ LANGUAGE plpgsql VOLATILE;
 
 CREATE TABLE "loadout" (
-    "id" TEXT PRIMARY KEY DEFAULT generate_uid(10),
+    "id" TEXT PRIMARY KEY DEFAULT generate_uid(7),
     "name" TEXT NOT NULL UNIQUE,
     "description" TEXT,
     "user_id" INTEGER NOT NULL REFERENCES "user"("id"),
