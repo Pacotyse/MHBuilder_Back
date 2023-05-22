@@ -13,7 +13,7 @@ router.route('/')
 
 router.route('/:id')
   .get(user.getOne)
-  .put(token.authentification, user.updateOne)
+  .put(validate(userSchema, 'body'), token.authentification, user.updateOne)
   .delete(token.authentification, user.deleteOne);
 
 router.route('/register')
@@ -21,6 +21,11 @@ router.route('/register')
 
 router.route('/login')
   .post(login.authentify);
+
+router.route('/logged')
+  .post(token.authentification, (req, res) => {
+    res.json(true);
+  });
 
 module.exports = router;
 

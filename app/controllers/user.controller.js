@@ -22,11 +22,11 @@ const userController = {
   async updateOne(req, res) {
     const userId = req.params.id;
     const {
-      email, password, username,
+      username,
     } = req.body;
     const data = await user.findByPk(userId);
     const updatedUser = await user.update({
-      id: data.id, email, password, username,
+      id: data.id, username,
     });
     res.status(201).json(updatedUser);
   },

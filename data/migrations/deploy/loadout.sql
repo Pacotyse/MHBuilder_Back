@@ -21,15 +21,15 @@ $$ LANGUAGE plpgsql VOLATILE;
 
 CREATE TABLE "loadout" (
     "id" TEXT PRIMARY KEY DEFAULT generate_uid(7),
-    "name" TEXT NOT NULL UNIQUE,
+    "name" TEXT NOT NULL,
     "description" TEXT,
     "user_id" INTEGER NOT NULL REFERENCES "user"("id"),
     "weapon_id" INTEGER NOT NULL REFERENCES "weapon"("id"),
-	"head_id" INTEGER NOT NULL REFERENCES "armor"("id"),
-	"chest_id" INTEGER NOT NULL REFERENCES "armor"("id"),
-	"arms_id" INTEGER NOT NULL REFERENCES "armor"("id"),
-	"waist_id" INTEGER NOT NULL REFERENCES "armor"("id"),
-	"legs_id" INTEGER NOT NULL REFERENCES "armor"("id"),
+	  "head_id" INTEGER REFERENCES "armor"("id"),
+	  "chest_id" INTEGER REFERENCES "armor"("id"),
+	  "arms_id" INTEGER REFERENCES "armor"("id"),
+	  "waist_id" INTEGER REFERENCES "armor"("id"),
+	  "legs_id" INTEGER REFERENCES "armor"("id"),
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
@@ -55,6 +55,7 @@ SELECT
       'defense_bonus', weapon_data.defense_bonus,
       'secret_effect', weapon_data.secret_effect  
   ) AS weapon,
+  loadout.head_id,
   json_build_object(
       'id', head_armor.id,
       'type', head_armor.type,
@@ -99,7 +100,9 @@ SELECT
 	  'defense', legs_armor.defense,
 	  'resistances', legs_armor.resistances,
 	  'skills', legs_armor.skills
-  ) AS legs
+  ) AS legs,
+  loadout.created_at,
+  loadout.updated_at
 FROM loadout
 JOIN weapon_data ON loadout.weapon_id = weapon_data.id
 JOIN armor_data AS head_armor ON loadout.head_id = head_armor.id
