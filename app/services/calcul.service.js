@@ -8,13 +8,7 @@ module.exports = {
     const stats = {
       attack: 0,
       affinity: 0,
-      elements: {
-        fire: 0,
-        water: 0,
-        thunder: 0,
-        ice: 0,
-        dragon: 0,
-      },
+      elements: [],
       sharpness: {
         red: 0,
         orange: 0,
@@ -50,6 +44,12 @@ module.exports = {
           if (value != null) {
             stats.sharpness[sharpness] += value;
           }
+        }
+      }
+
+      if (loadoutPiece && loadoutPiece.elements) {
+        for (const element of loadoutPiece.elements) {
+          stats.elements.push(element);
         }
       }
 
@@ -90,26 +90,36 @@ module.exports = {
     for (const oneSkill of stats.skills) {
       // eslint-disable-next-line no-await-in-loop
       const dataSkill = await skill.findEffect(oneSkill.id, oneSkill.level);
-      if (dataSkill && dataSkill.modifier_field) {
-        const field = dataSkill.modifier_field;
-        const operator = dataSkill.modifier_operator;
-        const value = dataSkill.modifier_value;
+      if (dataSkill && dataSkill.modifier) {
+        for (const modifier of dataSkill.modifier) {
+          const { field, operator, value } = modifier;
 
-        if (field.includes('.')) {
-          const [object, element] = field.split('.');
-          if (operator === '+') {
-            stats[object][element] += value;
+          if (field.includes('.')) {
+            const [object, element] = field.split('.');
+            const chosenElement = stats[object].find((e) => e.name === element);
+            if (chosenElement) {
+              if (operator === '+') {
+                chosenElement.value += value;
+              } else if (operator === '*') {
+                chosenElement.value *= value;
+              } else if (operator === '-') {
+                chosenElement.value -= value;
+              }
+            }
+            if (operator === '+') {
+              stats[object][element] += value;
+            } else if (operator === '*') {
+              stats[object][element] *= value;
+            } else if (operator === '-') {
+              stats[object][element] -= value;
+            }
+          } else if (operator === '+') {
+            stats[field] += value;
           } else if (operator === '*') {
-            stats[object][element] *= value;
+            stats[field] *= value;
           } else if (operator === '-') {
-            stats[object][element] *= value;
+            stats[field] -= value;
           }
-        } else if (operator === '+') {
-          stats[field] += value;
-        } else if (operator === '*') {
-          stats[field] *= value;
-        } else if (operator === '-') {
-          stats[field] -= value;
         }
       }
     }

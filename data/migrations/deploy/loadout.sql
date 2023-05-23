@@ -34,15 +34,16 @@ CREATE TABLE "loadout" (
     "updated_at" TIMESTAMPTZ
 );
 
-INSERT INTO "loadout" ("name", "description", "user_id", "weapon_id", "head_id", "chest_id", "arms_id", "waist_id", "legs_id") VALUES
-('Loadout 1', 'Description of loadout 1', 1, 1, 1, 2, 3, 4, 5),
-('Loadout 2', 'Description of loadout 2', 2, 2, 4, 3, 2, 1, 5);
+-- INSERT INTO "loadout" ("name", "description", "user_id", "weapon_id", "head_id", "chest_id", "arms_id", "waist_id", "legs_id") VALUES
+-- ('Loadout 1', 'Description of loadout 1', 1, 1, 1, 2, 3, 4, 5),
+-- ('Loadout 2', 'Description of loadout 2', 2, 2, 4, 3, 2, 1, 5);
 
 CREATE VIEW loadout_data AS 
 SELECT 
   loadout.id, 
   loadout.name,
   loadout.description,
+  loadout.user_id,
   json_build_object(
       'id', weapon_data.id,
       'type', weapon_data.type,
@@ -61,18 +62,18 @@ SELECT
       'type', head_armor.type,
       'name', head_armor.name,
       'rarity', head_armor.rarity,
-	  'defense', head_armor.defense,
-	  'resistances', head_armor.resistances,
-	  'skills', head_armor.skills
+	    'defense', head_armor.defense,
+	    'resistances', head_armor.resistances,
+	    'skills', head_armor.skills
   ) AS head,
   json_build_object(
       'id', chest_armor.id,
       'type', chest_armor.type,
       'name', chest_armor.name,
       'rarity', chest_armor.rarity,
-	  'defense', chest_armor.defense,
-	  'resistances', chest_armor.resistances,
-	  'skills', chest_armor.skills
+	    'defense', chest_armor.defense,
+	    'resistances', chest_armor.resistances,
+	    'skills', chest_armor.skills
   ) AS chest,
   json_build_object(
       'id', arms_armor.id,
@@ -88,18 +89,18 @@ SELECT
       'type', waist_armor.type,
       'name', waist_armor.name,
       'rarity', waist_armor.rarity,
-	  'defense', waist_armor.defense,
-	  'resistances', waist_armor.resistances,
-	  'skills', waist_armor.skills
+	    'defense', waist_armor.defense,
+	    'resistances', waist_armor.resistances,
+	    'skills', waist_armor.skills
   ) AS waist,
   json_build_object(
       'id', legs_armor.id,
       'type', legs_armor.type,
       'name', legs_armor.name,
       'rarity', legs_armor.rarity,
-	  'defense', legs_armor.defense,
-	  'resistances', legs_armor.resistances,
-	  'skills', legs_armor.skills
+	    'defense', legs_armor.defense,
+	    'resistances', legs_armor.resistances,
+	    'skills', legs_armor.skills
   ) AS legs,
   loadout.created_at,
   loadout.updated_at
