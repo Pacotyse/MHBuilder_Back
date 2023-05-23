@@ -19,34 +19,13 @@ CREATE TABLE "weapon" (
     "sharpness_white" INTEGER,
     "sharpness_purple" INTEGER,
     "sharpness_inactiv" INTEGER NOT NULL DEFAULT 50
-);
-
--- INSERT INTO "weapon" ("type", "name", "rarity", "attack", "affinity", "defense_bonus", "secret_effect", "sharpness_red", "sharpness_orange", "sharpness_yellow", "sharpness_green", "sharpness_blue", "sharpness_white", "sharpness_purple") 
--- VALUES 
--- ('great_sword', 'Wyvern Jawblade', 8, 220, -20, 0, 'None', 48, 20, null, null, null, null, null),
--- ('great_sword', 'Anguish', 8, 240,0, 0, 'None', 50, 30, null, null, null, null, null),
--- ('long_sword', 'Divine Slasher', 8, 180, 0, 0, 'None', 20, 20, 10, null, null, null, null),
--- ('long_sword', 'Reaver Calamity', 8, 170, 0, 0, 'None', 40, 30, 20, null, null, null, null),
--- ('sword_and_shield', 'Master Bang', 8, 120, 0, 0, 'None', 12, 20, null, null, null, null, null),
--- ('sword_and_shield', 'Teostra Emblem', 8, 110, 0, 0, 'None', 20, 15, null, null, null, null, null);
+); 
 
 CREATE TABLE "element" (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" TEXT NOT NULL UNIQUE,
 
 );
-
--- INSERT INTO "element" ("name")
--- VALUES
--- ('fire'),
--- ('water'),
--- ('thunder'),
--- ('ice'),
--- ('dragon'),
--- ('blast'),
--- ('poison'),
--- ('paralysis'),
--- ('sleep');
 
 CREATE TABLE "weapon_has_element" (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -56,30 +35,25 @@ CREATE TABLE "weapon_has_element" (
     "phiale" BOOLEAN NOT NULL DEFAULT false
 );
 
--- INSERT INTO "weapon_has_element" ("weapon_id", "element_id", "value")
--- VALUES
--- (1, 1, 80),
--- (2, 3, 95),
--- (3, 4, 45),
--- (3, 6, 32),
--- (4, 9, 47);
-
 CREATE VIEW weapon_data AS 
 SELECT 
-weapon.id, 
-weapon.type, 
-CONCAT(weapon.type, '_', weapon.rarity) AS icon,
-weapon.name, 
-weapon.rarity,
-weapon.attack,
-weapon.affinity,
-json_agg(
-    json_build_object(
-        'name', element.name, 
-		'value', weapon_has_element.value
-    )
-) AS element,
-json_build_object(
+  weapon.id, 
+  weapon.type, 
+  CONCAT(weapon.type, '_', weapon.rarity) AS icon,
+  weapon.name, 
+  weapon.rarity,
+  weapon.attack,
+  weapon.affinity,
+    COALESCE(
+        json_agg(
+            CASE
+                WHEN element.id IS NULL THEN NULL
+                ELSE json_build_object('name', element.name, 'value', weapon_has_element.value)
+            END
+        ),
+        '[]'::json -- Permet de renvoyer un tableau vide dans le cas ou l'arme n'a pas d'élément
+    ) AS elements,
+  json_build_object(
     'red', weapon.sharpness_red,
     'orange', weapon.sharpness_orange,
     'yellow', weapon.sharpness_yellow,
@@ -88,12 +62,12 @@ json_build_object(
     'white', weapon.sharpness_white,
     'purple', weapon.sharpness_purple,
     'inactiv', weapon.sharpness_inactiv
-) AS sharpness,
-weapon.defense_bonus, 
-weapon.secret_effect
+  ) AS sharpness,
+  weapon.defense_bonus, 
+  weapon.secret_effect
 FROM weapon 
-JOIN weapon_has_element ON weapon.id = weapon_has_element.weapon_id
-JOIN element ON element.id = weapon_has_element.element_id
+LEFT JOIN weapon_has_element ON weapon.id = weapon_has_element.weapon_id
+LEFT JOIN element ON element.id = weapon_has_element.element_id
 GROUP BY weapon.id;
 
 

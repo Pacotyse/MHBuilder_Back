@@ -40,7 +40,11 @@ const app = express();
 expressJSDocSwagger(app)(options, swagger);
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  allowedHeaders: ['Authorization', 'Content-Type'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 app.use(error.check);
 app.use(routerApi);
 

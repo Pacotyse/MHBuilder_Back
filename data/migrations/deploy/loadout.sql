@@ -34,10 +34,6 @@ CREATE TABLE "loadout" (
     "updated_at" TIMESTAMPTZ
 );
 
--- INSERT INTO "loadout" ("name", "description", "user_id", "weapon_id", "head_id", "chest_id", "arms_id", "waist_id", "legs_id") VALUES
--- ('Loadout 1', 'Description of loadout 1', 1, 1, 1, 2, 3, 4, 5),
--- ('Loadout 2', 'Description of loadout 2', 2, 2, 4, 3, 2, 1, 5);
-
 CREATE VIEW loadout_data AS 
 SELECT 
   loadout.id, 
@@ -51,12 +47,11 @@ SELECT
       'rarity', weapon_data.rarity,
       'attack', weapon_data.attack,
       'affinity', weapon_data.affinity,
-      'element', weapon_data.element,
+      'elements', weapon_data.elements,
       'sharpness', weapon_data.sharpness,
       'defense_bonus', weapon_data.defense_bonus,
       'secret_effect', weapon_data.secret_effect  
   ) AS weapon,
-  loadout.head_id,
   json_build_object(
       'id', head_armor.id,
       'type', head_armor.type,
