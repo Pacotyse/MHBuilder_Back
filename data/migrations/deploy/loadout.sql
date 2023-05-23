@@ -51,12 +51,11 @@ SELECT
       'rarity', weapon_data.rarity,
       'attack', weapon_data.attack,
       'affinity', weapon_data.affinity,
-      'element', weapon_data.element,
+      'elements', weapon_data.elements,
       'sharpness', weapon_data.sharpness,
       'defense_bonus', weapon_data.defense_bonus,
       'secret_effect', weapon_data.secret_effect  
   ) AS weapon,
-  loadout.head_id,
   json_build_object(
       'id', head_armor.id,
       'type', head_armor.type,

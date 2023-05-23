@@ -32,21 +32,8 @@ CREATE TABLE "weapon" (
 
 CREATE TABLE "element" (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "name" TEXT NOT NULL UNIQUE,
-
+    "name" TEXT NOT NULL UNIQUE
 );
-
--- INSERT INTO "element" ("name")
--- VALUES
--- ('fire'),
--- ('water'),
--- ('thunder'),
--- ('ice'),
--- ('dragon'),
--- ('blast'),
--- ('poison'),
--- ('paralysis'),
--- ('sleep');
 
 CREATE TABLE "weapon_has_element" (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -55,14 +42,6 @@ CREATE TABLE "weapon_has_element" (
     "value" INTEGER NOT NULL,
     "phiale" BOOLEAN NOT NULL DEFAULT false
 );
-
--- INSERT INTO "weapon_has_element" ("weapon_id", "element_id", "value")
--- VALUES
--- (1, 1, 80),
--- (2, 3, 95),
--- (3, 4, 45),
--- (3, 6, 32),
--- (4, 9, 47);
 
 CREATE VIEW weapon_data AS 
 SELECT 
@@ -78,7 +57,7 @@ json_agg(
         'name', element.name, 
 		'value', weapon_has_element.value
     )
-) AS element,
+) AS elements,
 json_build_object(
     'red', weapon.sharpness_red,
     'orange', weapon.sharpness_orange,
@@ -92,9 +71,8 @@ json_build_object(
 weapon.defense_bonus, 
 weapon.secret_effect
 FROM weapon 
-JOIN weapon_has_element ON weapon.id = weapon_has_element.weapon_id
-JOIN element ON element.id = weapon_has_element.element_id
+LEFT JOIN weapon_has_element ON weapon.id = weapon_has_element.weapon_id
+LEFT JOIN element ON element.id = weapon_has_element.element_id
 GROUP BY weapon.id;
-
 
 COMMIT;
