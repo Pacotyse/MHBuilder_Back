@@ -96,8 +96,8 @@ module.exports = {
 
           if (field.includes('.')) {
             const [object, element] = field.split('.');
-            if (object === 'elements') {
-              const chosenElement = stats[object].find((e) => e.name === element);
+            const chosenElement = stats[object].find((e) => e.name === element);
+            if (chosenElement) {
               if (operator === '+') {
                 chosenElement.value += value;
               } else if (operator === '*') {
