@@ -47,9 +47,11 @@ module.exports = {
         }
       }
 
-      if (loadoutPiece && loadoutPiece.elements) {
-        for (const element of loadoutPiece.elements) {
-          stats.elements.push(element);
+      if (loadoutPiece && loadoutPiece.element !== null) {
+        if (loadoutPiece && loadoutPiece.elements) {
+          for (const element of loadoutPiece.elements) {
+            stats.elements.push(element);
+          }
         }
       }
 
@@ -97,7 +99,8 @@ module.exports = {
           if (field.includes('.')) {
             const [object, element] = field.split('.');
             if (object === 'elements') {
-              const chosenElement = stats[object].find((e) => e.name === element);
+              const chosenElement = stats[object]?.find((e) => e && e.name === element);
+
               if (chosenElement) {
                 if (operator === '+') {
                   chosenElement.value += value;
