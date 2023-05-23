@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { user } = require('../models/index.datamapper');
 
+const tokenDuration = 86400;
+
 module.exports = {
   // eslint-disable-next-line consistent-return
   async authentify(req, res) {
@@ -20,7 +22,7 @@ module.exports = {
       email: data.email,
       username: data.username,
       ip: req.ip,
-    }, process.env.JWT_SECRET, { expiresIn: 3600 });
+    }, process.env.JWT_SECRET, { expiresIn: tokenDuration });
     return res.json({ id: data.id, username: data.username, token });
   },
 };

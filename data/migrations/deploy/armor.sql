@@ -22,37 +22,37 @@ CREATE TABLE "armor_has_skill" (
     "level" INTEGER DEFAULT(1)
 );
 
--- Seeding armor with 2 armor set
-INSERT INTO "armor" ("type", "name", "rarity", "defense", "resistance_fire", "resistance_water", "resistance_thunder", "resistance_ice", "resistance_dragon")
-VALUES 
-('head', 'Rathalos Helm', 5, 78, 3, -2, 0, 0, -1),
-('chest', 'Rathalos Mail', 5, 84, 3, -2, 0, 0, -1),
-('arms', 'Rathalos Braces', 5, 78, 3, -2, 0, 0, -1),
-('waist', 'Rathalos Coil', 5, 84, 3, -2, 0, 0, -1),
-('legs', 'Rathalos Greaves', 5, 78, 3, -2, 0, 0, -1),
-('head', 'Tigrex Helm', 4, 90, -2, 2, 0, -1, 0),
-('chest', 'Tigrex Mail', 4, 96, -2, 2, 0, -1, 0),
-('arms', 'Tigrex Vambraces', 4, 90, -2, 2, 0, -1, 0),
-('waist', 'Tigrex Coil', 4, 96, -2, 2, 0, -1, 0),
-('legs', 'Tigrex Greaves', 4, 90, -2, 2, 0, -1, 0);
+-- -- Seeding armor with 2 armor set
+-- INSERT INTO "armor" ("type", "name", "rarity", "defense", "resistance_fire", "resistance_water", "resistance_thunder", "resistance_ice", "resistance_dragon")
+-- VALUES 
+-- ('head', 'Rathalos Helm', 5, 78, 3, -2, 0, 0, -1),
+-- ('chest', 'Rathalos Mail', 5, 84, 3, -2, 0, 0, -1),
+-- ('arms', 'Rathalos Braces', 5, 78, 3, -2, 0, 0, -1),
+-- ('waist', 'Rathalos Coil', 5, 84, 3, -2, 0, 0, -1),
+-- ('legs', 'Rathalos Greaves', 5, 78, 3, -2, 0, 0, -1),
+-- ('head', 'Tigrex Helm', 4, 90, -2, 2, 0, -1, 0),
+-- ('chest', 'Tigrex Mail', 4, 96, -2, 2, 0, -1, 0),
+-- ('arms', 'Tigrex Vambraces', 4, 90, -2, 2, 0, -1, 0),
+-- ('waist', 'Tigrex Coil', 4, 96, -2, 2, 0, -1, 0),
+-- ('legs', 'Tigrex Greaves', 4, 90, -2, 2, 0, -1, 0);
 
--- Seeding armor_has_skill to link skill and armor
-INSERT INTO "armor_has_skill" ("armor_id", "skill_id", "level")
-VALUES 
-(1, 4, 7),
-(1, 2, 3), 
-(2, 2, 1),
-(3, 1, 2),
-(4, 2, 2),
-(5, 1, 1),
-(6, 1, 1), 
-(6, 2, 2), 
-(7, 1, 1), 
-(7, 2, 2), 
-(8, 1, 2), 
-(9, 1, 1), 
-(10, 2, 3), 
-(10, 2, 2); 
+-- -- Seeding armor_has_skill to link skill and armor
+-- INSERT INTO "armor_has_skill" ("armor_id", "skill_id", "level")
+-- VALUES 
+-- (1, 4, 7),
+-- (1, 2, 3), 
+-- (2, 2, 1),
+-- (3, 1, 2),
+-- (4, 2, 2),
+-- (5, 1, 1),
+-- (6, 1, 1), 
+-- (6, 2, 2), 
+-- (7, 1, 1), 
+-- (7, 2, 2), 
+-- (8, 1, 2), 
+-- (9, 1, 1), 
+-- (10, 2, 3), 
+-- (10, 2, 2); 
 
 -- Armor's view with all the specific data from skill and effect
 CREATE VIEW armor_data AS 
@@ -69,8 +69,7 @@ SELECT
         'thunder', armor.resistance_thunder, 
         'ice', armor.resistance_ice, 
         'dragon', armor.resistance_dragon
-        ) 
-    AS resistances,
+    ) AS resistances,
     json_agg(
         json_build_object(
             'id', skill.id,
@@ -79,10 +78,10 @@ SELECT
             'level_max', skill.level_max,
             'color', skill.color 
         )
-    ) as skills
+    ) AS skills
 FROM armor
-JOIN armor_has_skill ON armor_id = armor.id
-JOIN skill ON skill.id = armor_has_skill.skill_id
+LEFT JOIN armor_has_skill ON armor_id = armor.id
+LEFT JOIN skill ON skill.id = armor_has_skill.skill_id
 GROUP BY armor.id;
 
 COMMIT;
