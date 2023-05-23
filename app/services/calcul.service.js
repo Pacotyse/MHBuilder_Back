@@ -98,40 +98,32 @@ module.exports = {
             const [object, element] = field.split('.');
             if (object === 'elements') {
               const chosenElement = stats[object].find((e) => e.name === element);
-              if (chosenElement) {
-                if (operator === '+') {
-                  chosenElement.value += value;
-                } else if (operator === '*') {
-                  chosenElement.value *= value;
-                } else if (operator === '-') {
-                  chosenElement.value -= value;
-                }
-              }
-            } else {
-              const statsObject = stats[object];
-              if (Array.isArray(statsObject)) {
-                const chosenElement = statsObject.find((e) => e.name === element);
-                if (chosenElement) {
-                  if (operator === '+') {
-                    chosenElement.value += value;
-                  } else if (operator === '*') {
-                    chosenElement.value *= value;
-                  } else if (operator === '-') {
-                    chosenElement.value -= value;
-                  }
-                }
-              } else if (operator === '+') {
-                stats[object] += value;
+              if (operator === '+') {
+                chosenElement.value += value;
               } else if (operator === '*') {
-                stats[object] *= value;
+                chosenElement.value *= value;
               } else if (operator === '-') {
-                stats[object] -= value;
+                chosenElement.value -= value;
               }
             }
+            if (operator === '+') {
+              stats[object][element] += value;
+            } else if (operator === '*') {
+              stats[object][element] *= value;
+            } else if (operator === '-') {
+              stats[object][element] -= value;
+            }
+          } else if (operator === '+') {
+            stats[field] += value;
+          } else if (operator === '*') {
+            stats[field] *= value;
+          } else if (operator === '-') {
+            stats[field] -= value;
           }
         }
       }
     }
+
     res.json({ stats });
   },
 };
