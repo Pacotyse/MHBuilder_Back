@@ -2,8 +2,8 @@
 
 BEGIN;
 
-DROP VIEW skill_data;
-DROP TABLE IF EXISTS effect;
-DROP TABLE IF EXISTS skill;
+DROP VIEW IF EXISTS "skill_data";
+DROP TABLE IF EXISTS "effect";
+DROP TABLE IF EXISTS "skill";
 
 COMMIT;

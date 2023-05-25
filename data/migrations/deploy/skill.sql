@@ -7,7 +7,7 @@ CREATE TABLE "skill" (
     "name" TEXT NOT NULL UNIQUE,
     "description" TEXT NOT NULL,
     "level_max" INTEGER NOT NULL DEFAULT(1),
-    "color" TEXT NOT NULL
+    "color" TEXT DEFAULT('#fff')
 );
 
 CREATE TABLE "effect" (
@@ -18,17 +18,17 @@ CREATE TABLE "effect" (
     "modifier" JSON
 );
 
-CREATE VIEW skill_data AS
+CREATE VIEW "skill_data" AS
 SELECT 
-skill.id,
-skill.name,
-skill.description AS skill_description,
-skill.color,
-effect.level,
-skill.level_max,
-effect.description AS effect_description,
-effect.modifier
-FROM skill
-JOIN effect ON effect.skill_id = skill.id;
+"skill".id,
+"skill".name,
+"skill".description AS skill_description,
+"skill".color,
+"effect".level,
+"skill".level_max,
+"effect".description AS effect_description,
+"effect".modifier
+FROM "skill"
+JOIN "effect" ON "effect".skill_id = "skill".id;
 
 COMMIT;

@@ -68,7 +68,7 @@ module.exports = {
         }
       }
 
-      if (loadoutPiece && loadoutPiece.skills) {
+      if (loadoutPiece && loadoutPiece.skills && loadoutPiece.skills !== [null]) {
         for (const oneSkill of loadoutPiece.skills) {
           const existingSkill = stats.skills.find((s) => s.id === oneSkill.id);
           if (existingSkill) {
@@ -95,7 +95,6 @@ module.exports = {
       if (dataSkill && dataSkill.modifier) {
         for (const modifier of dataSkill.modifier) {
           const { field, operator, value } = modifier;
-
           if (field.includes('.')) {
             const [object, element] = field.split('.');
             if (object === 'elements') {
