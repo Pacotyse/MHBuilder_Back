@@ -1,19 +1,25 @@
 const express = require('express');
+const loadoutSchema = require('../schemas/loadout.schema');
+const validate = require('../middlewares/validate.middleware');
 const token = require('../middlewares/token.middleware');
-const calcul = require('../services/calcul.service');
+const calcul = require('../middlewares/calcul.middleware');
 
 const router = express.Router();
 const { loadout } = require('../controllers/api.controller');
 
 router.route('/')
   .get(loadout.getAll)
-  .post(token.authentification, loadout.createOne);
+  .post(validate(loadoutSchema, 'body'), token.authentification, calcul.stats, loadout.createOne);
 router.route('/:id')
   .get(loadout.getOne)
-  .put(token.authentification, loadout.updateOne)
+  .put(token.authentification, calcul.stats, loadout.updateOne)
   .delete(token.authentification, loadout.deleteOne);
-router.route('/details')
-  .post(calcul.stats);
+router.route('/stats')
+  .post(calcul.stats, (req, res) => {
+    const stats = { ...req.stats };
+    res.json({ stats });
+  });
+
 router.route('/user/:id')
   .get(loadout.getAllByUser);
 

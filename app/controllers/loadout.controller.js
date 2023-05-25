@@ -18,8 +18,9 @@ const loadoutController = {
   },
   async createOne(req, res) {
     const {
-      name, description, user_id, weapon_id, head_id, chest_id, arms_id, waist_id, legs_id, stats,
+      name, description, user_id, weapon_id, head_id, chest_id, arms_id, waist_id, legs_id,
     } = req.body;
+    const { stats } = req;
     const newLoadout = await loadout.create({
       name, description, user_id, weapon_id, head_id, chest_id, arms_id, waist_id, legs_id, stats,
     });
@@ -28,8 +29,9 @@ const loadoutController = {
   async updateOne(req, res) {
     const loadoutId = req.params.id;
     const {
-      name, description, weapon_id, head_id, chest_id, arms_id, waist_id, legs_id, stats,
+      name, description, weapon_id, head_id, chest_id, arms_id, waist_id, legs_id,
     } = req.body;
+    const { stats } = req;
     const data = await loadout.findByPk(loadoutId);
     const updatedLoadout = await loadout.update({
       id: data.id,

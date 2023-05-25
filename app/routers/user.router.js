@@ -1,8 +1,7 @@
 const express = require('express');
 const userSchema = require('../schemas/user.schema');
 const validate = require('../middlewares/validate.middleware');
-const login = require('../services/login.service');
-const encrypt = require('../middlewares/encrypt.middleware');
+
 const token = require('../middlewares/token.middleware');
 
 const router = express.Router();
@@ -15,17 +14,6 @@ router.route('/:id')
   .get(user.getOne)
   .put(validate(userSchema, 'body'), token.authentification, user.updateOne)
   .delete(token.authentification, user.deleteOne);
-
-router.route('/register')
-  .post(validate(userSchema, 'body'), encrypt.password, user.createOne);
-
-router.route('/login')
-  .post(login.authentify);
-
-router.route('/logged')
-  .post(token.authentification, (req, res) => {
-    res.json(true);
-  });
 
 module.exports = router;
 
