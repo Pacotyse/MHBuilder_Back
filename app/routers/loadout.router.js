@@ -12,8 +12,9 @@ router.route('/')
   .post(validate(loadoutSchema, 'body'), token.authentification, calcul.stats, loadout.createOne);
 router.route('/:id')
   .get(loadout.getOne)
-  .put(token.authentification, calcul.stats, loadout.updateOne)
+  .put(validate(loadoutSchema, 'body'), token.authentification, calcul.stats, loadout.updateOne)
   .delete(token.authentification, loadout.deleteOne);
+
 router.route('/stats')
   .post(calcul.stats, (req, res) => {
     const stats = { ...req.stats };

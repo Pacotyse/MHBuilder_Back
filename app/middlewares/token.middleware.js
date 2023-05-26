@@ -15,6 +15,9 @@ module.exports = {
       }
       const decoded = jwt.verify(tokenValue, process.env.JWT_SECRET);
       req.user = decoded;
+      // We take the user.id from the decoder token
+      const userId = decoded.id;
+      req.userId = userId;
       return next();
     } catch (error) {
       return res.status(401).json({ error: 'Invalid token.' });

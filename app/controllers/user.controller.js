@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const { user } = require('../models/index.datamapper');
 
 const userController = {
@@ -20,20 +21,30 @@ const userController = {
     res.status(201).json(newUser);
   },
   async updateOne(req, res) {
-    const userId = req.params.id;
+    const user_id = req.params.id;
     const {
       username,
     } = req.body;
-    const data = await user.findByPk(userId);
-    const updatedUser = await user.update({
-      id: data.id, username,
-    });
-    res.status(201).json(updatedUser);
+    const { userId } = req;
+    const data = await user.findByPk(user_id);
+    if (data.id === userId) {
+      const updatedUser = await user.update({
+        id: data.id, username,
+      });
+      res.status(201).json(updatedUser);
+    } else {
+      res.status(403).json({ error: 'Unauthorized access.' });
+    }
   },
   async deleteOne(req, res) {
-    const userId = req.params.id;
-    const deletedData = await user.delete(userId);
-    res.status(201).json(deletedData);
+    const user_id = req.params.id;
+    const { userId } = req;
+    if (user_id == userId) {
+      const deletedData = await user.delete(user_id);
+      res.status(201).json(deletedData);
+    } else {
+      res.status(403).json({ error: 'Unauthorized access.' });
+    }
   },
 };
 

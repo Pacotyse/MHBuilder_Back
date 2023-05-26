@@ -17,8 +17,9 @@ const loadoutController = {
     res.json(data);
   },
   async createOne(req, res) {
+    const user_id = req.userId;
     const {
-      name, description, user_id, weapon_id, head_id, chest_id, arms_id, waist_id, legs_id,
+      name, description, weapon_id, head_id, chest_id, arms_id, waist_id, legs_id,
     } = req.body;
     const { stats } = req;
     const newLoadout = await loadout.create({
@@ -31,26 +32,36 @@ const loadoutController = {
     const {
       name, description, weapon_id, head_id, chest_id, arms_id, waist_id, legs_id,
     } = req.body;
-    const { stats } = req;
+    const { stats, userId } = req;
     const data = await loadout.findByPk(loadoutId);
-    const updatedLoadout = await loadout.update({
-      id: data.id,
-      name,
-      description,
-      weapon_id,
-      head_id,
-      chest_id,
-      arms_id,
-      waist_id,
-      legs_id,
-      stats,
-    });
-    res.status(201).json(updatedLoadout);
+    if (userId === data.user_id) {
+      const updatedLoadout = await loadout.update({
+        id: data.id,
+        name,
+        description,
+        weapon_id,
+        head_id,
+        chest_id,
+        arms_id,
+        waist_id,
+        legs_id,
+        stats,
+      });
+      res.status(201).json(updatedLoadout);
+    } else {
+      res.status(403).json({ error: 'Unauthorized access.' });
+    }
   },
   async deleteOne(req, res) {
+    const { userId } = req;
     const loadoutId = req.params.id;
-    const deletedData = await loadout.delete(loadoutId);
-    res.status(201).json(deletedData);
+    const { user_id } = await loadout.findByPk(loadoutId);
+    if (userId === user_id) {
+      const deletedData = await loadout.delete(loadoutId);
+      res.status(201).json(deletedData);
+    } else {
+      res.status(403).json({ error: 'Unauthorized access.' });
+    }
   },
 };
 

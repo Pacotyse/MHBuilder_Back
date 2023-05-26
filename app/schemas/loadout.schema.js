@@ -3,7 +3,7 @@ const Joi = require('joi');
 
 module.exports = Joi.object({
   name: Joi.string().min(5).max(40),
-  description: Joi.string().max(1000),
+  description: Joi.string().max(1000).allow('').optional(),
   user_id: Joi.number(),
   weapon_id: Joi.number(),
   head_id: Joi.number(),
