@@ -55,7 +55,8 @@ SELECT
 "loadout".arms_id,
 "loadout".waist_id,
 "loadout".legs_id,
-"loadout".stats
+"loadout".stats,
+"loadout".created_at
 FROM "loadout" 
 JOIN "user" ON "user".id = "loadout".user_id
 JOIN "weapon_data" ON "weapon_data".id = "loadout".weapon_id;

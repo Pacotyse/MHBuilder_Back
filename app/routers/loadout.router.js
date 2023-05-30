@@ -10,6 +10,8 @@ const { loadout } = require('../controllers/api.controller');
 router.route('/')
   .get(loadout.getAll)
   .post(validate(loadoutSchema, 'body'), token.authentification, calcul.stats, loadout.createOne);
+router.route('/filter/latest')
+  .get(loadout.getAllLatest);
 router.route('/:id')
   .get(loadout.getOne)
   .put(validate(loadoutSchema, 'body'), token.authentification, calcul.stats, loadout.updateOne)

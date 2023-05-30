@@ -39,7 +39,7 @@ const userController = {
   async deleteOne(req, res) {
     const user_id = req.params.id;
     const { userId } = req;
-    if (user_id == userId) {
+    if (Number(user_id) === userId) {
       const deletedData = await user.delete(user_id);
       res.status(201).json(deletedData);
     } else {

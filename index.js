@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const http = require('http');
-const bcrypt = require('bcrypt');
 const logger = require('./app/utils/logger');
 const app = require('./app/app');
 

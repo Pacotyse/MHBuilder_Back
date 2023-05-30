@@ -16,6 +16,10 @@ const loadoutController = {
     const data = await loadout_data.findAllBy('user_id', id);
     res.json(data);
   },
+  async getAllLatest(req, res) {
+    const data = await loadout_data.findAllLatest();
+    res.json(data);
+  },
   async createOne(req, res) {
     const user_id = req.userId;
     const {
