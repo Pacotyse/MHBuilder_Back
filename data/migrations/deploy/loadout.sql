@@ -35,12 +35,6 @@ CREATE TABLE "loadout" (
     "updated_at" TIMESTAMPTZ
 );
 
-ALTER TABLE loadout
-  ADD CONSTRAINT loadout_user_id_fkey
-    FOREIGN KEY (user_id)
-    REFERENCES "user"(id)
-    ON DELETE CASCADE;
-
 CREATE VIEW "loadout_data" AS 
 SELECT 
 "loadout".id,
